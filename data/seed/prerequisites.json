@@ -1,0 +1,578 @@
+[
+  {
+    "skill_id": "data_structures",
+    "requires_skill_id": "prog_logic"
+  },
+  {
+    "skill_id": "algorithms",
+    "requires_skill_id": "data_structures"
+  },
+  {
+    "skill_id": "algorithms",
+    "requires_skill_id": "math_discrete"
+  },
+  {
+    "skill_id": "computer_architecture",
+    "requires_skill_id": "prog_logic"
+  },
+  {
+    "skill_id": "os_fundamentals",
+    "requires_skill_id": "computer_architecture"
+  },
+  {
+    "skill_id": "networking_basics",
+    "requires_skill_id": "os_fundamentals"
+  },
+  {
+    "skill_id": "linux_cli",
+    "requires_skill_id": "os_fundamentals"
+  },
+  {
+    "skill_id": "database_fundamentals",
+    "requires_skill_id": "data_structures"
+  },
+  {
+    "skill_id": "html5",
+    "requires_skill_id": "prog_logic"
+  },
+  {
+    "skill_id": "css3",
+    "requires_skill_id": "html5"
+  },
+  {
+    "skill_id": "responsive_design",
+    "requires_skill_id": "css3"
+  },
+  {
+    "skill_id": "javascript_basics",
+    "requires_skill_id": "prog_logic"
+  },
+  {
+    "skill_id": "dom_manipulation",
+    "requires_skill_id": "html5"
+  },
+  {
+    "skill_id": "dom_manipulation",
+    "requires_skill_id": "javascript_basics"
+  },
+  {
+    "skill_id": "javascript_async",
+    "requires_skill_id": "dom_manipulation"
+  },
+  {
+    "skill_id": "typescript",
+    "requires_skill_id": "javascript_async"
+  },
+  {
+    "skill_id": "react_basics",
+    "requires_skill_id": "dom_manipulation"
+  },
+  {
+    "skill_id": "react_basics",
+    "requires_skill_id": "javascript_async"
+  },
+  {
+    "skill_id": "react_hooks",
+    "requires_skill_id": "react_basics"
+  },
+  {
+    "skill_id": "react_router",
+    "requires_skill_id": "react_basics"
+  },
+  {
+    "skill_id": "state_management",
+    "requires_skill_id": "react_hooks"
+  },
+  {
+    "skill_id": "nextjs",
+    "requires_skill_id": "react_hooks"
+  },
+  {
+    "skill_id": "nextjs",
+    "requires_skill_id": "typescript"
+  },
+  {
+    "skill_id": "tailwind_css",
+    "requires_skill_id": "css3"
+  },
+  {
+    "skill_id": "css_animations",
+    "requires_skill_id": "css3"
+  },
+  {
+    "skill_id": "web_accessibility",
+    "requires_skill_id": "html5"
+  },
+  {
+    "skill_id": "web_performance",
+    "requires_skill_id": "javascript_async"
+  },
+  {
+    "skill_id": "frontend_testing",
+    "requires_skill_id": "react_basics"
+  },
+  {
+    "skill_id": "build_tools",
+    "requires_skill_id": "javascript_basics"
+  },
+  {
+    "skill_id": "python_basics",
+    "requires_skill_id": "prog_logic"
+  },
+  {
+    "skill_id": "python_advanced",
+    "requires_skill_id": "python_basics"
+  },
+  {
+    "skill_id": "csharp_dotnet_basics",
+    "requires_skill_id": "prog_logic"
+  },
+  {
+    "skill_id": "csharp_dotnet_core",
+    "requires_skill_id": "csharp_dotnet_basics"
+  },
+  {
+    "skill_id": "csharp_dotnet_core",
+    "requires_skill_id": "networking_basics"
+  },
+  {
+    "skill_id": "sql_relational_db",
+    "requires_skill_id": "database_fundamentals"
+  },
+  {
+    "skill_id": "nosql_databases",
+    "requires_skill_id": "database_fundamentals"
+  },
+  {
+    "skill_id": "orm_frameworks",
+    "requires_skill_id": "sql_relational_db"
+  },
+  {
+    "skill_id": "rest_api_design",
+    "requires_skill_id": "networking_basics"
+  },
+  {
+    "skill_id": "rest_api_design",
+    "requires_skill_id": "database_fundamentals"
+  },
+  {
+    "skill_id": "graphql",
+    "requires_skill_id": "rest_api_design"
+  },
+  {
+    "skill_id": "websockets_realtime",
+    "requires_skill_id": "networking_basics"
+  },
+  {
+    "skill_id": "websockets_realtime",
+    "requires_skill_id": "rest_api_design"
+  },
+  {
+    "skill_id": "auth_security",
+    "requires_skill_id": "rest_api_design"
+  },
+  {
+    "skill_id": "auth_security",
+    "requires_skill_id": "sql_relational_db"
+  },
+  {
+    "skill_id": "caching_strategies",
+    "requires_skill_id": "sql_relational_db"
+  },
+  {
+    "skill_id": "caching_strategies",
+    "requires_skill_id": "nosql_databases"
+  },
+  {
+    "skill_id": "message_queues",
+    "requires_skill_id": "networking_basics"
+  },
+  {
+    "skill_id": "microservices_architecture",
+    "requires_skill_id": "rest_api_design"
+  },
+  {
+    "skill_id": "microservices_architecture",
+    "requires_skill_id": "message_queues"
+  },
+  {
+    "skill_id": "microservices_architecture",
+    "requires_skill_id": "containerization_docker"
+  },
+  {
+    "skill_id": "system_design",
+    "requires_skill_id": "microservices_architecture"
+  },
+  {
+    "skill_id": "system_design",
+    "requires_skill_id": "caching_strategies"
+  },
+  {
+    "skill_id": "backend_testing",
+    "requires_skill_id": "rest_api_design"
+  },
+  {
+    "skill_id": "api_security",
+    "requires_skill_id": "auth_security"
+  },
+  {
+    "skill_id": "database_optimization",
+    "requires_skill_id": "sql_relational_db"
+  },
+  {
+    "skill_id": "cloud_computing_fundamentals",
+    "requires_skill_id": "networking_basics"
+  },
+  {
+    "skill_id": "cloud_computing_fundamentals",
+    "requires_skill_id": "os_fundamentals"
+  },
+  {
+    "skill_id": "aws_core_services",
+    "requires_skill_id": "cloud_computing_fundamentals"
+  },
+  {
+    "skill_id": "azure_core_services",
+    "requires_skill_id": "cloud_computing_fundamentals"
+  },
+  {
+    "skill_id": "gcp_core_services",
+    "requires_skill_id": "cloud_computing_fundamentals"
+  },
+  {
+    "skill_id": "containerization_docker",
+    "requires_skill_id": "linux_cli"
+  },
+  {
+    "skill_id": "docker_compose",
+    "requires_skill_id": "containerization_docker"
+  },
+  {
+    "skill_id": "container_orchestration_k8s",
+    "requires_skill_id": "containerization_docker"
+  },
+  {
+    "skill_id": "container_orchestration_k8s",
+    "requires_skill_id": "cloud_networking"
+  },
+  {
+    "skill_id": "helm_charts",
+    "requires_skill_id": "container_orchestration_k8s"
+  },
+  {
+    "skill_id": "infrastructure_as_code_terraform",
+    "requires_skill_id": "cloud_computing_fundamentals"
+  },
+  {
+    "skill_id": "ci_cd_pipelines",
+    "requires_skill_id": "git_version_control"
+  },
+  {
+    "skill_id": "ci_cd_pipelines",
+    "requires_skill_id": "containerization_docker"
+  },
+  {
+    "skill_id": "observability_monitoring",
+    "requires_skill_id": "container_orchestration_k8s"
+  },
+  {
+    "skill_id": "logging_tracing",
+    "requires_skill_id": "container_orchestration_k8s"
+  },
+  {
+    "skill_id": "cloud_networking",
+    "requires_skill_id": "cloud_computing_fundamentals"
+  },
+  {
+    "skill_id": "cloud_security_iam",
+    "requires_skill_id": "cloud_computing_fundamentals"
+  },
+  {
+    "skill_id": "serverless_computing",
+    "requires_skill_id": "cloud_computing_fundamentals"
+  },
+  {
+    "skill_id": "site_reliability_engineering",
+    "requires_skill_id": "observability_monitoring"
+  },
+  {
+    "skill_id": "gitops_argocd",
+    "requires_skill_id": "helm_charts"
+  },
+  {
+    "skill_id": "gitops_argocd",
+    "requires_skill_id": "ci_cd_pipelines"
+  },
+  {
+    "skill_id": "cloud_cost_optimization",
+    "requires_skill_id": "cloud_computing_fundamentals"
+  },
+  {
+    "skill_id": "info_security_principles",
+    "requires_skill_id": "networking_basics"
+  },
+  {
+    "skill_id": "cryptography_basics",
+    "requires_skill_id": "math_discrete"
+  },
+  {
+    "skill_id": "cryptography_basics",
+    "requires_skill_id": "info_security_principles"
+  },
+  {
+    "skill_id": "network_security",
+    "requires_skill_id": "networking_basics"
+  },
+  {
+    "skill_id": "network_security",
+    "requires_skill_id": "info_security_principles"
+  },
+  {
+    "skill_id": "os_hardening",
+    "requires_skill_id": "os_fundamentals"
+  },
+  {
+    "skill_id": "os_hardening",
+    "requires_skill_id": "linux_cli"
+  },
+  {
+    "skill_id": "vulnerability_assessment",
+    "requires_skill_id": "network_security"
+  },
+  {
+    "skill_id": "penetration_testing",
+    "requires_skill_id": "vulnerability_assessment"
+  },
+  {
+    "skill_id": "penetration_testing",
+    "requires_skill_id": "linux_cli"
+  },
+  {
+    "skill_id": "web_app_pentesting",
+    "requires_skill_id": "penetration_testing"
+  },
+  {
+    "skill_id": "web_app_pentesting",
+    "requires_skill_id": "rest_api_design"
+  },
+  {
+    "skill_id": "soc_operations",
+    "requires_skill_id": "network_security"
+  },
+  {
+    "skill_id": "soc_operations",
+    "requires_skill_id": "os_hardening"
+  },
+  {
+    "skill_id": "incident_response",
+    "requires_skill_id": "soc_operations"
+  },
+  {
+    "skill_id": "threat_intelligence",
+    "requires_skill_id": "soc_operations"
+  },
+  {
+    "skill_id": "enterprise_iam",
+    "requires_skill_id": "info_security_principles"
+  },
+  {
+    "skill_id": "enterprise_iam",
+    "requires_skill_id": "auth_security"
+  },
+  {
+    "skill_id": "malware_analysis_basics",
+    "requires_skill_id": "os_fundamentals"
+  },
+  {
+    "skill_id": "malware_analysis_basics",
+    "requires_skill_id": "computer_architecture"
+  },
+  {
+    "skill_id": "security_compliance",
+    "requires_skill_id": "info_security_principles"
+  },
+  {
+    "skill_id": "cloud_security_posture",
+    "requires_skill_id": "cloud_security_iam"
+  },
+  {
+    "skill_id": "cloud_security_posture",
+    "requires_skill_id": "security_compliance"
+  },
+  {
+    "skill_id": "security_scripting_python",
+    "requires_skill_id": "python_basics"
+  },
+  {
+    "skill_id": "security_scripting_python",
+    "requires_skill_id": "network_security"
+  },
+  {
+    "skill_id": "api_security_testing",
+    "requires_skill_id": "web_app_pentesting"
+  },
+  {
+    "skill_id": "api_security_testing",
+    "requires_skill_id": "api_security"
+  },
+  {
+    "skill_id": "python_for_data_science",
+    "requires_skill_id": "python_basics"
+  },
+  {
+    "skill_id": "pandas_data_wrangling",
+    "requires_skill_id": "python_for_data_science"
+  },
+  {
+    "skill_id": "exploratory_data_analysis",
+    "requires_skill_id": "pandas_data_wrangling"
+  },
+  {
+    "skill_id": "linear_algebra_for_ml",
+    "requires_skill_id": "math_linear_algebra"
+  },
+  {
+    "skill_id": "multivariable_calc_optimization",
+    "requires_skill_id": "math_calc_prob"
+  },
+  {
+    "skill_id": "probability_statistics_for_data",
+    "requires_skill_id": "math_calc_prob"
+  },
+  {
+    "skill_id": "data_preprocessing_feature_eng",
+    "requires_skill_id": "pandas_data_wrangling"
+  },
+  {
+    "skill_id": "data_preprocessing_feature_eng",
+    "requires_skill_id": "exploratory_data_analysis"
+  },
+  {
+    "skill_id": "classical_machine_learning",
+    "requires_skill_id": "data_preprocessing_feature_eng"
+  },
+  {
+    "skill_id": "classical_machine_learning",
+    "requires_skill_id": "linear_algebra_for_ml"
+  },
+  {
+    "skill_id": "classical_machine_learning",
+    "requires_skill_id": "probability_statistics_for_data"
+  },
+  {
+    "skill_id": "model_evaluation_metrics",
+    "requires_skill_id": "classical_machine_learning"
+  },
+  {
+    "skill_id": "deep_learning_fundamentals",
+    "requires_skill_id": "classical_machine_learning"
+  },
+  {
+    "skill_id": "deep_learning_fundamentals",
+    "requires_skill_id": "multivariable_calc_optimization"
+  },
+  {
+    "skill_id": "pytorch_framework",
+    "requires_skill_id": "deep_learning_fundamentals"
+  },
+  {
+    "skill_id": "computer_vision_cnns",
+    "requires_skill_id": "pytorch_framework"
+  },
+  {
+    "skill_id": "nlp_fundamentals",
+    "requires_skill_id": "pytorch_framework"
+  },
+  {
+    "skill_id": "transformer_architectures",
+    "requires_skill_id": "nlp_fundamentals"
+  },
+  {
+    "skill_id": "large_language_models",
+    "requires_skill_id": "transformer_architectures"
+  },
+  {
+    "skill_id": "vector_databases",
+    "requires_skill_id": "python_for_data_science"
+  },
+  {
+    "skill_id": "vector_databases",
+    "requires_skill_id": "nlp_fundamentals"
+  },
+  {
+    "skill_id": "rag_systems",
+    "requires_skill_id": "vector_databases"
+  },
+  {
+    "skill_id": "rag_systems",
+    "requires_skill_id": "large_language_models"
+  },
+  {
+    "skill_id": "mlops_experiment_tracking",
+    "requires_skill_id": "pytorch_framework"
+  },
+  {
+    "skill_id": "model_serving_apis",
+    "requires_skill_id": "pytorch_framework"
+  },
+  {
+    "skill_id": "model_serving_apis",
+    "requires_skill_id": "rest_api_design"
+  },
+  {
+    "skill_id": "big_data_spark",
+    "requires_skill_id": "python_for_data_science"
+  },
+  {
+    "skill_id": "big_data_spark",
+    "requires_skill_id": "sql_relational_db"
+  },
+  {
+    "skill_id": "clean_code_solid",
+    "requires_skill_id": "prog_logic"
+  },
+  {
+    "skill_id": "design_patterns",
+    "requires_skill_id": "clean_code_solid"
+  },
+  {
+    "skill_id": "software_architecture",
+    "requires_skill_id": "design_patterns"
+  },
+  {
+    "skill_id": "test_driven_development",
+    "requires_skill_id": "clean_code_solid"
+  },
+  {
+    "skill_id": "agile_scrum",
+    "requires_skill_id": "prog_logic"
+  },
+  {
+    "skill_id": "code_review_practices",
+    "requires_skill_id": "git_version_control"
+  },
+  {
+    "skill_id": "code_review_practices",
+    "requires_skill_id": "clean_code_solid"
+  },
+  {
+    "skill_id": "api_contract_design",
+    "requires_skill_id": "rest_api_design"
+  },
+  {
+    "skill_id": "devsecops_practices",
+    "requires_skill_id": "ci_cd_pipelines"
+  },
+  {
+    "skill_id": "devsecops_practices",
+    "requires_skill_id": "api_security"
+  },
+  {
+    "skill_id": "performance_profiling",
+    "requires_skill_id": "algorithms"
+  },
+  {
+    "skill_id": "technical_writing_docs",
+    "requires_skill_id": "git_version_control"
+  }
+]

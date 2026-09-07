@@ -1,0 +1,724 @@
+[
+  {
+    "id": "frontend_developer",
+    "name": "Frontend Developer",
+    "description": "Engineers modern, accessible, and responsive client-side web applications using HTML, CSS, JavaScript, TypeScript, and modern SPA frameworks like React and Next.js.",
+    "required_skills": [
+      {
+        "skill_id": "prog_logic",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "git_version_control",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "html5",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "css3",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "responsive_design",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "javascript_basics",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "dom_manipulation",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "javascript_async",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "typescript",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "react_basics",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "react_hooks",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "react_router",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "state_management",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "nextjs",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "tailwind_css",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "web_accessibility",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "web_performance",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "frontend_testing",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "build_tools",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "clean_code_solid",
+        "is_mandatory": false,
+        "importance": 3
+      }
+    ]
+  },
+  {
+    "id": "backend_developer",
+    "name": "Backend Developer",
+    "description": "Designs and builds secure, scalable backend services, databases, REST APIs, and asynchronous microservices in modern server platforms.",
+    "required_skills": [
+      {
+        "skill_id": "prog_logic",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "data_structures",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "algorithms",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "os_fundamentals",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "networking_basics",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "linux_cli",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "git_version_control",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "database_fundamentals",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "python_basics",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "python_advanced",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "csharp_dotnet_basics",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "csharp_dotnet_core",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "sql_relational_db",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "nosql_databases",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "orm_frameworks",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "rest_api_design",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "auth_security",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "caching_strategies",
+        "is_mandatory": false,
+        "importance": 4
+      },
+      {
+        "skill_id": "message_queues",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "containerization_docker",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "backend_testing",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "api_security",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "database_optimization",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "clean_code_solid",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "design_patterns",
+        "is_mandatory": false,
+        "importance": 3
+      }
+    ]
+  },
+  {
+    "id": "fullstack_developer",
+    "name": "Full Stack Developer",
+    "description": "Bridges frontend and backend engineering, creating complete web systems end-to-end with high UI responsiveness and resilient API integrations.",
+    "required_skills": [
+      {
+        "skill_id": "prog_logic",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "git_version_control",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "linux_cli",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "html5",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "css3",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "responsive_design",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "javascript_basics",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "dom_manipulation",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "javascript_async",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "typescript",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "react_basics",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "react_hooks",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "nextjs",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "tailwind_css",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "database_fundamentals",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "sql_relational_db",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "rest_api_design",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "auth_security",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "containerization_docker",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "ci_cd_pipelines",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "clean_code_solid",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "frontend_testing",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "backend_testing",
+        "is_mandatory": false,
+        "importance": 3
+      }
+    ]
+  },
+  {
+    "id": "ai_ml_engineer",
+    "name": "AI / ML Engineer",
+    "description": "Develops, evaluates, and deploys machine learning models, deep neural networks, transformer architectures, and RAG systems to production environments.",
+    "required_skills": [
+      {
+        "skill_id": "prog_logic",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "math_linear_algebra",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "math_calc_prob",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "data_structures",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "algorithms",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "git_version_control",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "linux_cli",
+        "is_mandatory": true,
+        "importance": 3
+      },
+      {
+        "skill_id": "python_basics",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "python_advanced",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "python_for_data_science",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "pandas_data_wrangling",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "exploratory_data_analysis",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "data_preprocessing_feature_eng",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "classical_machine_learning",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "model_evaluation_metrics",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "deep_learning_fundamentals",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "pytorch_framework",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "nlp_fundamentals",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "transformer_architectures",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "large_language_models",
+        "is_mandatory": false,
+        "importance": 4
+      },
+      {
+        "skill_id": "vector_databases",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "rag_systems",
+        "is_mandatory": false,
+        "importance": 4
+      },
+      {
+        "skill_id": "mlops_experiment_tracking",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "model_serving_apis",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "containerization_docker",
+        "is_mandatory": true,
+        "importance": 4
+      }
+    ]
+  },
+  {
+    "id": "cybersecurity_analyst",
+    "name": "Cybersecurity Analyst",
+    "description": "Safeguards information assets, monitors networks for security incidents, audits vulnerabilities, conducts penetration tests, and implements defense-in-depth.",
+    "required_skills": [
+      {
+        "skill_id": "prog_logic",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "networking_basics",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "os_fundamentals",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "linux_cli",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "git_version_control",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "info_security_principles",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "cryptography_basics",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "network_security",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "os_hardening",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "vulnerability_assessment",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "penetration_testing",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "web_app_pentesting",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "soc_operations",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "incident_response",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "threat_intelligence",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "enterprise_iam",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "security_compliance",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "security_scripting_python",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "cloud_security_posture",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "api_security_testing",
+        "is_mandatory": false,
+        "importance": 3
+      }
+    ]
+  },
+  {
+    "id": "cloud_engineer",
+    "name": "Cloud & DevOps Engineer",
+    "description": "Architects, provisions, and automates resilient cloud infrastructure, Kubernetes clusters, CI/CD pipelines, and observability monitoring systems.",
+    "required_skills": [
+      {
+        "skill_id": "prog_logic",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "networking_basics",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "os_fundamentals",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "linux_cli",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "git_version_control",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "database_fundamentals",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "cloud_computing_fundamentals",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "aws_core_services",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "azure_core_services",
+        "is_mandatory": false,
+        "importance": 4
+      },
+      {
+        "skill_id": "gcp_core_services",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "cloud_networking",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "cloud_security_iam",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "containerization_docker",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "docker_compose",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "container_orchestration_k8s",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "helm_charts",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "infrastructure_as_code_terraform",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "ci_cd_pipelines",
+        "is_mandatory": true,
+        "importance": 5
+      },
+      {
+        "skill_id": "observability_monitoring",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "logging_tracing",
+        "is_mandatory": true,
+        "importance": 4
+      },
+      {
+        "skill_id": "site_reliability_engineering",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "gitops_argocd",
+        "is_mandatory": false,
+        "importance": 3
+      },
+      {
+        "skill_id": "cloud_cost_optimization",
+        "is_mandatory": false,
+        "importance": 3
+      }
+    ]
+  }
+]

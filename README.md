@@ -1,250 +1,171 @@
-# AI Curriculum Recommendation System
+# Adaptive Curriculum Engine (ACE)
 
-## 1. Project Title
+> **Standalone AI Intelligence Engine for Personalized Academic & Career Roadmaps**  
+> Fast, deterministic Directed Acyclic Graph (DAG) topological curriculum sequencing, semantic skill matching, and gap analysis engine.
 
-**AI Curriculum Recommendation System: An Intelligent Platform for Personalised Academic Roadmaps Based on Global University Curricula**
-
----
-
-## 2. Abstract
-
-The AI Curriculum Recommendation System is an intelligent educational platform designed to assist students, universities, and academic advisors in constructing structured learning roadmaps. By analysing curricula from prestigious universities worldwide, the system identifies knowledge gaps, prerequisite relationships, and essential competencies required for a chosen academic or career objective.
-
-Unlike traditional recommendation systems that merely suggest courses, this platform generates comprehensive learning pathways by considering prerequisite dependencies, topic importance, skill acquisition, estimated learning time, and institutional curriculum comparisons. The architecture has been designed to accommodate future integration with machine learning models, knowledge graphs, and large language models.
+[![CI Pipeline](https://github.com/AbdullahBahamish/adaptive-curriculum-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/AbdullahBahamish/adaptive-curriculum-engine/actions/workflows/ci.yml)
+[![Python Version](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg)](https://fastapi.tiangolo.com/)
+[![NetworkX](https://img.shields.io/badge/NetworkX-3.4+-orange.svg)](https://networkx.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
 
-## 3. Motivation
+## 1. Executive Summary
 
-Students frequently encounter difficulties when determining what to learn, in which sequence, and to what depth. Academic programmes differ substantially between universities, while online learning resources often lack coherent progression.
+Many students and aspiring software professionals struggle when preparing for technical careers because they lack a clear understanding of role competencies and prerequisite dependencies. Studying topics in an unsuitable order leads to cognitive overload, overlooked fundamentals, and high abandonment rates.
 
-This project addresses these challenges by providing an intelligent recommendation engine capable of synthesising curricula from multiple institutions into a unified, personalised roadmap. The long-term objective is to reduce uncertainty in educational planning while promoting evidence-based learning pathways informed by internationally recognised academic standards.
-
----
-
-## 4. Features
-
-* Personalised learning roadmap generation
-* Curriculum comparison across multiple universities
-* Prerequisite dependency analysis
-* Topic importance scoring
-* Skill extraction and recommendation
-* Semester-by-semester roadmap planning
-* University curriculum database
-* Course and topic relationship modelling
-* Estimated learning duration calculation
-* Extensible object-oriented architecture
-* Machine learning integration support
-* Knowledge graph compatibility
-* Exportable roadmap generation
-* Developer-friendly modular design
-
----
-
-## 5. System Architecture
-
-The system follows a modular architecture in which each component is responsible for a specific stage of the recommendation pipeline.
+**ACE** is a standalone, production-ready AI and curriculum optimization engine. It analyzes a learner's confirmed competencies against target career profiles, identifies missing skills, resolves deep transitive prerequisite chains, and computes mathematically sound, topologically sorted learning sequences.
 
 ```
-Student Profile
-        │
-        ▼
-Curriculum Database
-        │
-        ▼
-Curriculum Parser
-        │
-        ▼
-Knowledge Representation
-        │
-        ▼
-Recommendation Engine
-        │
-        ▼
-Roadmap Generator
-        │
-        ▼
-Visualisation / Export
+┌─────────────────────────────────────────────────────────────┐
+│                 Client Applications / Consumers             │
+│            (Web / Mobile Apps, EdTech Platforms, LMS)       │
+└──────────────────────────────┬──────────────────────────────┘
+                               │  REST API (X-Service-API-Key)
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│             Adaptive Curriculum Engine (ACE)                │
+│                                                             │
+│   ┌──────────────────────────┐   ┌──────────────────────┐   │
+│   │ Graph Engine (DAG / DFS) │   │ AI & Semantic Layer  │   │
+│   │ • Kahn's Topological Sort│   │ • Sentence-Xformers  │   │
+│   │ • Transitive Closure     │   │ • LLM Explainers     │   │
+│   │ • Cycle Detection O(V+E) │   │ • Skill Matcher      │   │
+│   └────────────┬─────────────┘   └──────────┬───────────┘   │
+└────────────────┼────────────────────────────┼───────────────┘
+                 ▼                            ▼
+      [ PostgreSQL Database ]     [ External LLM APIs / Local ]
 ```
 
-Primary modules include:
+---
 
-* Student Management
-* University Repository
-* Course Repository
-* Topic Repository
-* Skill Repository
-* Recommendation Engine
-* Roadmap Generator
-* Data Export Module
+## 2. Core Capabilities
+
+- **Deterministic DAG Sequencing**: Core curriculum generation uses Kahn's algorithm and NetworkX graph traversal—guaranteeing 100% mathematical validity with zero hallucinations.
+- **Automated Cycle Detection & Prevention**: Real-time DFS cycle detection ensures that curriculum prerequisite graphs remain strictly acyclic ($O(V + E)$). Any attempt to introduce a circular dependency is rejected at the API boundary.
+- **Binary Assessment Model**: Clean Yes/No self-confirmation per skill, enabling unambiguous gap computation and deterministic progression.
+- **Transitive Prerequisite Resolution**: Automatically detects and injects unconfirmed foundational skills (e.g., pulling *Programming Logic* when *React* is missing).
+- **Curated Multi-Domain Dataset**: Pre-populated with **112 technical skills**, **144 prerequisite edges**, and **6 industry career tracks**.
+- **Hybrid AI Enhancements**: Natural language study plan explanations and semantic skill query matching powered by Sentence-Transformers, OpenAI, Gemini, or local LLMs.
+- **Autonomous Standalone Architecture**: Fully decoupled, containerized engine featuring clean REST APIs, independent PostgreSQL persistence, and API Key middleware.
 
 ---
 
-## 6. Data Model
+## 3. Supported Career Tracks
 
-The platform is centred around several core entities.
+ACE comes pre-loaded with comprehensive skill benchmarks across 6 core industry roles:
 
-### Student
-
-Represents an individual learner together with completed courses, acquired skills, learning objectives, and academic profile.
-
-### University
-
-Stores institutional information together with its curriculum and course catalogue.
-
-### Course
-
-Represents a university course including prerequisites, topics, credits, and learning outcomes.
-
-### Topic
-
-Represents an individual concept or subject covered by one or more courses.
-
-### Skill
-
-Represents practical or theoretical competencies developed through course completion.
-
-### Resource
-
-Contains recommended books, articles, videos, and online materials associated with particular topics.
-
-### Roadmap
-
-Represents the generated personalised learning pathway organised into sequential stages.
+1. **Frontend Developer** (`frontend_developer`) — HTML5, CSS3, Modern JS, TypeScript, React, Next.js, Web Accessibility, Performance.
+2. **Backend Developer** (`backend_developer`) — Python, C# / .NET Core, Relational SQL, NoSQL, REST APIs, Microservices, Docker.
+3. **Full Stack Developer** (`fullstack_developer`) — End-to-end integration across Next.js frontend, REST APIs, SQL, Docker, and CI/CD.
+4. **AI / ML Engineer** (`ai_ml_engineer`) — Linear Algebra, Calculus, Scikit-Learn, PyTorch, Transformers, LLMs, Vector DBs, RAG.
+5. **Cybersecurity Analyst** (`cybersecurity_analyst`) — Network Defense, OS Hardening, Wireshark, Penetration Testing, SOC SIEM, Incident Response.
+6. **Cloud & DevOps Engineer** (`cloud_engineer`) — AWS/Azure/GCP, Docker, Kubernetes, Terraform IaC, GitHub Actions CI/CD, Prometheus.
 
 ---
 
-## 7. Installation
+## 4. Quickstart Guide
 
-Clone the repository.
+### Option A: Using Docker Compose (Recommended)
 
+Start PostgreSQL and the ACE AI service with a single command:
+
+```bash
+docker compose up -d --build
+```
+
+The service will automatically:
+1. Initialize the PostgreSQL database container.
+2. Run schema migrations via Alembic.
+3. Seed the 112 skills, 144 prerequisites, and 6 career tracks.
+4. Expose the REST API at `http://localhost:8000`.
+5. Provide interactive Swagger API documentation at `http://localhost:8000/docs`.
+
+---
+
+### Option B: Local Virtual Environment
+
+#### 1. Clone & Setup
 ```bash
 git clone https://github.com/AbdullahBahamish/adaptive-curriculum-engine.git
+cd adaptive-curriculum-engine
+
+# Requires Python 3.13
+python -m venv .venv
+# Windows:
+.venv\Scripts\activate
+# Linux/macOS:
+source .venv/bin/activate
+
+pip install --upgrade pip
+pip install -e ".[dev]"
 ```
 
-Navigate to the project directory.
-
+#### 2. Configure Environment
 ```bash
-cd AI-Curriculum-Recommendation-System
+cp .env.example .env
 ```
 
-Create a virtual environment.
-
+#### 3. Generate & Seed Data
 ```bash
-python -m venv venv
+# Validate and generate seed JSON files
+python scripts/generate_seed_data.py
+
+# Seed into database
+python scripts/seed.py
 ```
 
-Activate the environment.
-
-Windows
-
+#### 4. Run Development Server
 ```bash
-venv\Scripts\activate
-```
-
-Linux/macOS
-
-```bash
-source venv/bin/activate
-```
-
-Install dependencies.
-
-```bash
-pip install -r requirements.txt
-```
-
-Run the application.
-
-```bash
-python main.py
+uvicorn ace.api.main:app --reload --port 8000
 ```
 
 ---
 
-## 8. Example Usage
+## 5. API Reference
 
-Create a student profile.
+All protected endpoints require the service secret header:  
+`X-Service-API-Key: <SERVICE_API_KEY>`
 
-```python
-student = Student(
-    name="Abdullah",
-    university="Hadhramout University"
-)
-```
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/health` | Service health and version status |
+| `POST` | `/api/v1/gap-analysis` | Compute missing skills & readiness percentage |
+| `POST` | `/api/v1/learning-path` | Generate topologically ordered curriculum path |
+| `GET` | `/api/v1/skills` | List skills (filter by category / search) |
+| `POST` | `/api/v1/skills` | Register a new skill |
+| `GET` | `/api/v1/careers` | List all careers and required skills |
+| `POST` | `/api/v1/prerequisites` | Add prerequisite edge (**with automated cycle prevention**) |
 
-Load university curricula.
-
-```python
-universities = load_universities()
-```
-
-Generate recommendations.
-
-```python
-roadmap = generate_roadmap(student, universities)
-```
-
-Display the roadmap.
-
-```python
-print(roadmap)
-```
+*For complete request/response contracts and JSON schemas, see [docs/api-contract.md](docs/api-contract.md).*
 
 ---
 
-## 9. Folder Structure
+## 6. Testing & Quality Assurance
 
-```
-AI-Curriculum-Recommendation-System/
+ACE includes a comprehensive automated test suite spanning graph algorithms, database repositories, seed integrity, and REST API routes:
 
-├── data/
-│
-├── docs/
-│
-├── src/
-│   ├── models/
-│   ├── recommendation/
-│   ├── services/
-│   ├── utils/
-│   └── visualization/
-│
-├── tests/
-│
-├── notebooks/
-│
-├── requirements.txt
-├── README.md
-├── LICENSE
-└── main.py
+```bash
+# Run full test suite
+pytest -v
+
+# Run with test coverage report
+pytest --cov=ace --cov-report=term-missing
 ```
+
+All 27 automated tests run in sub-second execution (< 0.6s) using in-memory SQLite and mock dependencies.
 
 ---
 
-## 10. Future Improvements
+## 7. Architecture & Documentation
 
-Future development directions include:
-
-* Machine learning–based recommendation ranking
-* Knowledge graph construction
-* Curriculum similarity analysis
-* Automatic syllabus extraction from university websites
-* PDF curriculum parsing
-* Career-oriented recommendation engine
-* Scholarship recommendation module
-* Large language model integration
-* Interactive web application
-* REST API
-* Mobile application
-* Real-time curriculum updates
-* Learning analytics dashboard
-* Recommendation explainability
-* Reinforcement learning for adaptive roadmap optimisation
+- [System Architecture & API Integration Contract](docs/api-contract.md)
+- [Algorithmic Graph Theory & Complexity Analysis](docs/graph-algorithm.md)
+- [Dataset Taxonomy & Sourcing Framework](docs/dataset-sourcing.md)
 
 ---
 
-## 11. License
+## 8. License
 
-This project is distributed under the MIT License.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and its associated documentation files to use, modify, distribute, and publish the software, subject to the conditions specified in the license.
+Distributed under the MIT License. See [LICENSE](LICENSE) for details.
