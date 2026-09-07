@@ -1,0 +1,45 @@
+﻿version: "3.9"
+
+services:
+  # PostgreSQL — owned exclusively by the AI Engine
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ace_user
+      POSTGRES_PASSWORD: ace_password
+      POSTGRES_DB: ace_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ace_user -d ace_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ACE AI Engine service
+  ai-engine:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: "postgresql+psycopg2://ace_user:ace_password@db:5432/ace_db"
+      SERVICE_API_KEY: "local-dev-key-change-in-production"
+      ENVIRONMENT: "development"
+      DEBUG: "true"
+      LLM_ENABLED: "false"
+      EMBEDDINGS_ENABLED: "false"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./src:/app/src   # Hot-reload in dev
+      - ./data:/app/data
+
+volumes:
+  postgres_data:

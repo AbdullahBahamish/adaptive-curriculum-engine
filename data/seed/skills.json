@@ -1,0 +1,898 @@
+[
+  {
+    "id": "prog_logic",
+    "name": "Programming Logic & Problem Solving",
+    "category": "cs_foundations",
+    "description": "Fundamental programming constructs, control flow, conditions, loops, and algorithmic thinking.",
+    "difficulty": 1,
+    "estimated_hours": 20
+  },
+  {
+    "id": "math_discrete",
+    "name": "Discrete Mathematics",
+    "category": "cs_foundations",
+    "description": "Set theory, propositional logic, relations, combinatorics, and graph theory basics.",
+    "difficulty": 2,
+    "estimated_hours": 30
+  },
+  {
+    "id": "math_linear_algebra",
+    "name": "Linear Algebra Fundamentals",
+    "category": "cs_foundations",
+    "description": "Vectors, matrices, systems of linear equations, eigenvalues, and transformations.",
+    "difficulty": 2,
+    "estimated_hours": 30
+  },
+  {
+    "id": "math_calc_prob",
+    "name": "Calculus & Probability Basics",
+    "category": "cs_foundations",
+    "description": "Derivatives, integrals, random variables, probability distributions, and Bayes theorem.",
+    "difficulty": 2,
+    "estimated_hours": 35
+  },
+  {
+    "id": "data_structures",
+    "name": "Data Structures",
+    "category": "cs_foundations",
+    "description": "Arrays, linked lists, stacks, queues, hash tables, heaps, binary search trees.",
+    "difficulty": 2,
+    "estimated_hours": 40
+  },
+  {
+    "id": "algorithms",
+    "name": "Algorithms & Complexity Analysis",
+    "category": "cs_foundations",
+    "description": "Sorting, binary search, recursion, graph traversals (BFS/DFS), and asymptotic Big-O analysis.",
+    "difficulty": 3,
+    "estimated_hours": 45
+  },
+  {
+    "id": "computer_architecture",
+    "name": "Computer Architecture & Organization",
+    "category": "cs_foundations",
+    "description": "CPU execution cycle, memory hierarchy, cache, register architecture, and assembly concepts.",
+    "difficulty": 2,
+    "estimated_hours": 25
+  },
+  {
+    "id": "os_fundamentals",
+    "name": "Operating Systems Fundamentals",
+    "category": "cs_foundations",
+    "description": "Processes, threads, concurrency, scheduling, virtual memory, paging, and I/O subsystems.",
+    "difficulty": 2,
+    "estimated_hours": 30
+  },
+  {
+    "id": "networking_basics",
+    "name": "Computer Networking Fundamentals",
+    "category": "cs_foundations",
+    "description": "OSI and TCP/IP models, sockets, IPv4/IPv6, DNS, HTTP/HTTPS, and routing protocols.",
+    "difficulty": 2,
+    "estimated_hours": 30
+  },
+  {
+    "id": "linux_cli",
+    "name": "Linux & Shell Scripting",
+    "category": "cs_foundations",
+    "description": "File system navigation, permissions, process management, pipe redirection, and Bash scripting.",
+    "difficulty": 2,
+    "estimated_hours": 25
+  },
+  {
+    "id": "git_version_control",
+    "name": "Git & Distributed Version Control",
+    "category": "cs_foundations",
+    "description": "Git branching, merging, rebasing, pull requests, resolving conflicts, and GitHub workflows.",
+    "difficulty": 1,
+    "estimated_hours": 15
+  },
+  {
+    "id": "database_fundamentals",
+    "name": "Database Fundamentals & Relational Modeling",
+    "category": "cs_foundations",
+    "description": "Relational algebra, ER diagrams, normalization (1NF-3NF), keys, and ACID transactions.",
+    "difficulty": 2,
+    "estimated_hours": 25
+  },
+  {
+    "id": "html5",
+    "name": "HTML5 Semantic Structure & Accessibility",
+    "category": "frontend",
+    "description": "Semantic markup, modern HTML5 elements, forms validation, metadata, and accessibility semantics.",
+    "difficulty": 1,
+    "estimated_hours": 15
+  },
+  {
+    "id": "css3",
+    "name": "CSS3 Core Styling & Box Model",
+    "category": "frontend",
+    "description": "CSS selectors, box model, specificity, typography, colors, and modern layout foundations.",
+    "difficulty": 1,
+    "estimated_hours": 20
+  },
+  {
+    "id": "responsive_design",
+    "name": "Responsive Design, Flexbox & CSS Grid",
+    "category": "frontend",
+    "description": "Flexbox layouts, CSS Grid systems, media queries, fluid typography, and mobile-first design.",
+    "difficulty": 2,
+    "estimated_hours": 25
+  },
+  {
+    "id": "javascript_basics",
+    "name": "Modern JavaScript (ES6+)",
+    "category": "frontend",
+    "description": "Data types, closures, arrow functions, destructuring, modules, classes, and array methods.",
+    "difficulty": 2,
+    "estimated_hours": 35
+  },
+  {
+    "id": "dom_manipulation",
+    "name": "DOM Manipulation & Browser Events",
+    "category": "frontend",
+    "description": "Document Object Model, event bubbling, event delegation, web storage, and dynamic UI updates.",
+    "difficulty": 2,
+    "estimated_hours": 20
+  },
+  {
+    "id": "javascript_async",
+    "name": "Asynchronous JavaScript & Event Loop",
+    "category": "frontend",
+    "description": "Call stack, microtasks, event loop, Promises, async/await, and Fetch API.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "typescript",
+    "name": "TypeScript Language & Tooling",
+    "category": "frontend",
+    "description": "Static typing, interfaces, generics, utility types, union types, and compiler configurations.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "react_basics",
+    "name": "React.js Core Fundamentals",
+    "category": "frontend",
+    "description": "JSX, functional components, props, useState, useEffect, lists, keys, and component lifecycle.",
+    "difficulty": 2,
+    "estimated_hours": 35
+  },
+  {
+    "id": "react_hooks",
+    "name": "Advanced React Hooks & Patterns",
+    "category": "frontend",
+    "description": "useMemo, useCallback, useRef, useReducer, custom hooks, and context optimization.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "react_router",
+    "name": "Client-Side Routing with React Router",
+    "category": "frontend",
+    "description": "Declarative client-side routing, URL parameters, nested layouts, loaders, and navigation guards.",
+    "difficulty": 2,
+    "estimated_hours": 15
+  },
+  {
+    "id": "state_management",
+    "name": "Frontend State Management",
+    "category": "frontend",
+    "description": "Global state architecture, Redux Toolkit, Zustand, selectors, and state immutability.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "nextjs",
+    "name": "Next.js & Server Components",
+    "category": "frontend",
+    "description": "React Server Components (RSC), App Router, SSR, SSG, ISR, API routes, and streaming.",
+    "difficulty": 3,
+    "estimated_hours": 40
+  },
+  {
+    "id": "tailwind_css",
+    "name": "Tailwind CSS & Utility-First Styling",
+    "category": "frontend",
+    "description": "Utility classes, configuration, themes, arbitrary values, responsive prefixes, and dark mode.",
+    "difficulty": 2,
+    "estimated_hours": 20
+  },
+  {
+    "id": "css_animations",
+    "name": "CSS Animations & Micro-Interactions",
+    "category": "frontend",
+    "description": "Keyframe animations, CSS transitions, transforms, SVG animation, and performant hardware acceleration.",
+    "difficulty": 2,
+    "estimated_hours": 15
+  },
+  {
+    "id": "web_accessibility",
+    "name": "Web Accessibility (A11y) & WCAG",
+    "category": "frontend",
+    "description": "WCAG 2.1 compliance, WAI-ARIA attributes, keyboard navigation, screen reader testing, and color contrast.",
+    "difficulty": 2,
+    "estimated_hours": 20
+  },
+  {
+    "id": "web_performance",
+    "name": "Frontend Web Performance & Core Web Vitals",
+    "category": "frontend",
+    "description": "LCP, FID/INP, CLS, code splitting, lazy loading, image optimization, and bundle analysis.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "frontend_testing",
+    "name": "Frontend Testing (Unit & Component)",
+    "category": "frontend",
+    "description": "Unit testing with Vitest/Jest, React Testing Library, user-event interactions, and mocking.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "build_tools",
+    "name": "Modern Build Tools & Bundlers",
+    "category": "frontend",
+    "description": "Vite, ESBuild, Webpack fundamentals, module federation, tree-shaking, and asset pipelines.",
+    "difficulty": 2,
+    "estimated_hours": 20
+  },
+  {
+    "id": "python_basics",
+    "name": "Python Language Fundamentals & OOP",
+    "category": "backend",
+    "description": "Python data structures, object-oriented design, modules, exceptions, and virtual environments.",
+    "difficulty": 1,
+    "estimated_hours": 30
+  },
+  {
+    "id": "python_advanced",
+    "name": "Advanced Python & Asynchronous Programming",
+    "category": "backend",
+    "description": "Decorators, generators, context managers, typing, asyncio concurrency, and metaprogramming.",
+    "difficulty": 3,
+    "estimated_hours": 35
+  },
+  {
+    "id": "csharp_dotnet_basics",
+    "name": "C# Language Fundamentals & OOP",
+    "category": "backend",
+    "description": "C# syntax, type safety, LINQ, interfaces, abstract classes, generics, and memory management.",
+    "difficulty": 2,
+    "estimated_hours": 35
+  },
+  {
+    "id": "csharp_dotnet_core",
+    "name": "ASP.NET Core Web API Development",
+    "category": "backend",
+    "description": "ASP.NET Core pipeline, middleware, dependency injection, routing, filters, and controller architecture.",
+    "difficulty": 3,
+    "estimated_hours": 40
+  },
+  {
+    "id": "sql_relational_db",
+    "name": "Advanced SQL & Relational Databases",
+    "category": "backend",
+    "description": "Complex joins, subqueries, window functions, indexes, execution plans, and transactions in PostgreSQL.",
+    "difficulty": 2,
+    "estimated_hours": 35
+  },
+  {
+    "id": "nosql_databases",
+    "name": "NoSQL Database Systems",
+    "category": "backend",
+    "description": "Document stores (MongoDB), key-value stores (Redis), data modeling, and eventual consistency.",
+    "difficulty": 2,
+    "estimated_hours": 30
+  },
+  {
+    "id": "orm_frameworks",
+    "name": "Object-Relational Mapping (EF Core / SQLAlchemy)",
+    "category": "backend",
+    "description": "Entity relationships, migrations, eager/lazy loading, query generation, and unit-of-work patterns.",
+    "difficulty": 2,
+    "estimated_hours": 25
+  },
+  {
+    "id": "rest_api_design",
+    "name": "RESTful API Architecture & OpenAPI",
+    "category": "backend",
+    "description": "HTTP semantics, URI resource design, status codes, content negotiation, pagination, and OpenAPI 3.0.",
+    "difficulty": 2,
+    "estimated_hours": 25
+  },
+  {
+    "id": "graphql",
+    "name": "GraphQL API Design & Execution",
+    "category": "backend",
+    "description": "GraphQL schema definition, query and mutation resolvers, subscriptions, and solving N+1 queries.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "websockets_realtime",
+    "name": "WebSockets & Real-Time Communication",
+    "category": "backend",
+    "description": "Bi-directional WebSocket protocol, connection lifecycle, heartbeat, SignalR, and real-time event broadcasting.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "auth_security",
+    "name": "Authentication & Authorization Architecture",
+    "category": "backend",
+    "description": "JWT tokens, refresh token flows, OAuth2, OpenID Connect, RBAC, password hashing (Argon2/bcrypt).",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "caching_strategies",
+    "name": "Distributed Caching & Redis",
+    "category": "backend",
+    "description": "Cache-aside, write-through, write-behind, cache stampede mitigation, TTLs, and Redis data structures.",
+    "difficulty": 3,
+    "estimated_hours": 20
+  },
+  {
+    "id": "message_queues",
+    "name": "Message Queues & Event-Driven Architecture",
+    "category": "backend",
+    "description": "Publish/subscribe, point-to-point, RabbitMQ, Apache Kafka, idempotency, and dead-letter exchanges.",
+    "difficulty": 3,
+    "estimated_hours": 35
+  },
+  {
+    "id": "microservices_architecture",
+    "name": "Microservices Architecture & Distributed Patterns",
+    "category": "backend",
+    "description": "Service decomposition, API gateway, circuit breaker, saga pattern, and service discovery.",
+    "difficulty": 4,
+    "estimated_hours": 40
+  },
+  {
+    "id": "system_design",
+    "name": "System Design & High Availability Architecture",
+    "category": "backend",
+    "description": "Horizontal scaling, load balancing, CAP theorem, database sharding, replication, and rate limiting.",
+    "difficulty": 4,
+    "estimated_hours": 45
+  },
+  {
+    "id": "backend_testing",
+    "name": "Backend Automated Testing & Mocking",
+    "category": "backend",
+    "description": "Unit testing, integration testing with Testcontainers, mocking database dependencies, and test coverage.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "api_security",
+    "name": "API Security & OWASP Top 10 Defenses",
+    "category": "backend",
+    "description": "Injection prevention, CORS policies, CSRF tokens, rate limiting, data sanitization, and secure headers.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "database_optimization",
+    "name": "Database Performance Tuning & Query Optimization",
+    "category": "backend",
+    "description": "Index design (B-tree, GIN), EXPLAIN ANALYZE interpretation, connection pooling, and partition strategies.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "cloud_computing_fundamentals",
+    "name": "Cloud Computing Concepts & Service Models",
+    "category": "cloud_devops",
+    "description": "IaaS, PaaS, SaaS, shared responsibility model, regions, availability zones, and cloud economics.",
+    "difficulty": 2,
+    "estimated_hours": 25
+  },
+  {
+    "id": "aws_core_services",
+    "name": "AWS Core Services & Infrastructure",
+    "category": "cloud_devops",
+    "description": "Amazon EC2, S3, RDS, DynamoDB, VPC, IAM policies, Route53, and CloudWatch.",
+    "difficulty": 3,
+    "estimated_hours": 40
+  },
+  {
+    "id": "azure_core_services",
+    "name": "Azure Core Services & Administration",
+    "category": "cloud_devops",
+    "description": "Azure Virtual Machines, Blob Storage, Azure SQL, Microsoft Entra ID, App Services, and VNets.",
+    "difficulty": 3,
+    "estimated_hours": 40
+  },
+  {
+    "id": "gcp_core_services",
+    "name": "Google Cloud Platform Fundamentals",
+    "category": "cloud_devops",
+    "description": "Google Compute Engine, Cloud Storage, Cloud SQL, BigQuery, IAM roles, and VPC networks.",
+    "difficulty": 3,
+    "estimated_hours": 35
+  },
+  {
+    "id": "containerization_docker",
+    "name": "Containerization with Docker",
+    "category": "cloud_devops",
+    "description": "Dockerfile creation, multi-stage builds, container lifecycle, networking, volumes, and layer caching.",
+    "difficulty": 2,
+    "estimated_hours": 30
+  },
+  {
+    "id": "docker_compose",
+    "name": "Multi-Container Applications with Docker Compose",
+    "category": "cloud_devops",
+    "description": "Compose specifications, service dependencies, environment variables, internal networks, and volumes.",
+    "difficulty": 2,
+    "estimated_hours": 20
+  },
+  {
+    "id": "container_orchestration_k8s",
+    "name": "Kubernetes Architecture & Orchestration",
+    "category": "cloud_devops",
+    "description": "Pods, ReplicaSets, Deployments, Services (ClusterIP, NodePort, LoadBalancer), Ingress, and ConfigMaps.",
+    "difficulty": 4,
+    "estimated_hours": 50
+  },
+  {
+    "id": "helm_charts",
+    "name": "Kubernetes Packaging with Helm",
+    "category": "cloud_devops",
+    "description": "Helm chart structure, templates, values overrides, release management, and chart repositories.",
+    "difficulty": 3,
+    "estimated_hours": 20
+  },
+  {
+    "id": "infrastructure_as_code_terraform",
+    "name": "Infrastructure as Code with Terraform",
+    "category": "cloud_devops",
+    "description": "HCL syntax, providers, state management, remote backend, modules, variables, and plan/apply workflows.",
+    "difficulty": 3,
+    "estimated_hours": 40
+  },
+  {
+    "id": "ci_cd_pipelines",
+    "name": "Continuous Integration & Deployment (CI/CD)",
+    "category": "cloud_devops",
+    "description": "GitHub Actions workflows, build-test-deploy pipelines, matrix builds, secrets management, and release tagging.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "observability_monitoring",
+    "name": "Metrics, Monitoring & Alerting (Prometheus & Grafana)",
+    "category": "cloud_devops",
+    "description": "PromQL, Prometheus exporters, alerting rules, Grafana dashboard composition, and Golden Signals.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "logging_tracing",
+    "name": "Distributed Tracing & Centralized Logging",
+    "category": "cloud_devops",
+    "description": "OpenTelemetry instrumentation, span contexts, distributed trace visualization, and ELK/Loki log aggregation.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "cloud_networking",
+    "name": "Cloud Virtual Networks & Security",
+    "category": "cloud_devops",
+    "description": "VPC peering, NAT Gateways, Security Groups / Network ACLs, Bastion hosts, and Global Load Balancers.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "cloud_security_iam",
+    "name": "Cloud IAM & Least Privilege Architecture",
+    "category": "cloud_devops",
+    "description": "Role-based IAM, permission boundaries, service accounts, workload identity, and secret vaults (KMS / HashiCorp).",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "serverless_computing",
+    "name": "Serverless Architectures & FaaS",
+    "category": "cloud_devops",
+    "description": "AWS Lambda, Azure Functions, event triggers, cold starts, concurrency controls, and API integration.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "site_reliability_engineering",
+    "name": "Site Reliability Engineering (SRE) Principles",
+    "category": "cloud_devops",
+    "description": "SLIs, SLOs, SLAs, error budgets, blameless postmortems, chaos engineering, and incident management.",
+    "difficulty": 4,
+    "estimated_hours": 30
+  },
+  {
+    "id": "gitops_argocd",
+    "name": "GitOps Continuous Delivery with ArgoCD",
+    "category": "cloud_devops",
+    "description": "Declarative GitOps paradigm, ArgoCD applications, sync waves, automated rollbacks, and multi-cluster delivery.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "cloud_cost_optimization",
+    "name": "Cloud Cost Optimization & FinOps",
+    "category": "cloud_devops",
+    "description": "Resource rightsizing, reserved instances, spot instances, storage lifecycle tiering, and cost visibility tags.",
+    "difficulty": 2,
+    "estimated_hours": 20
+  },
+  {
+    "id": "info_security_principles",
+    "name": "Information Security Fundamentals & CIA Triad",
+    "category": "cybersecurity",
+    "description": "Confidentiality, integrity, availability, threat modeling, defense-in-depth, and attack surfaces.",
+    "difficulty": 1,
+    "estimated_hours": 20
+  },
+  {
+    "id": "cryptography_basics",
+    "name": "Applied Cryptography & PKI",
+    "category": "cybersecurity",
+    "description": "Symmetric (AES) and asymmetric (RSA/ECC) encryption, SHA hashing, HMAC, digital certificates, and TLS.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "network_security",
+    "name": "Network Defense & Traffic Analysis",
+    "category": "cybersecurity",
+    "description": "Stateful firewalls, IDS/IPS (Snort/Suricata), packet inspection with Wireshark, VPNs, and micro-segmentation.",
+    "difficulty": 3,
+    "estimated_hours": 35
+  },
+  {
+    "id": "os_hardening",
+    "name": "Operating System Hardening & Baselines",
+    "category": "cybersecurity",
+    "description": "CIS benchmarks, disabling unnecessary services, SSH hardening, iptables/UFW, AppArmor/SELinux, and auditd.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "vulnerability_assessment",
+    "name": "Vulnerability Assessment & Management",
+    "category": "cybersecurity",
+    "description": "Vulnerability scanning with Nessus/OpenVAS, CVSS score evaluation, remediation tracking, and patch management.",
+    "difficulty": 2,
+    "estimated_hours": 25
+  },
+  {
+    "id": "penetration_testing",
+    "name": "Ethical Hacking & Penetration Testing",
+    "category": "cybersecurity",
+    "description": "Reconnaissance, scanning (Nmap), exploitation frameworks (Metasploit), privilege escalation, and reporting.",
+    "difficulty": 4,
+    "estimated_hours": 45
+  },
+  {
+    "id": "web_app_pentesting",
+    "name": "Web Application Penetration Testing",
+    "category": "cybersecurity",
+    "description": "Hands-on Burp Suite, SQL injection, XSS, SSRF, CSRF, IDOR, and authentication bypass exploitation.",
+    "difficulty": 4,
+    "estimated_hours": 40
+  },
+  {
+    "id": "soc_operations",
+    "name": "Security Operations Center (SOC) & SIEM Analysis",
+    "category": "cybersecurity",
+    "description": "SIEM configuration (Splunk/Elastic/Wazuh), security log correlation, alert triage, and false-positive reduction.",
+    "difficulty": 3,
+    "estimated_hours": 35
+  },
+  {
+    "id": "incident_response",
+    "name": "Incident Response & Digital Forensics",
+    "category": "cybersecurity",
+    "description": "NIST/SANS IR lifecycle, memory forensics (Volatility), disk imaging, containment strategies, and chain of custody.",
+    "difficulty": 3,
+    "estimated_hours": 35
+  },
+  {
+    "id": "threat_intelligence",
+    "name": "Cyber Threat Intelligence & MITRE ATT&CK",
+    "category": "cybersecurity",
+    "description": "Threat actor tactics, techniques, procedures (TTPs), MITRE ATT&CK mapping, and IOC indicator feeds.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "enterprise_iam",
+    "name": "Enterprise IAM & Zero Trust Architecture",
+    "category": "cybersecurity",
+    "description": "Zero Trust philosophy, identity federation, SAML 2.0, Multi-Factor Authentication (MFA), and Conditional Access.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "malware_analysis_basics",
+    "name": "Malware Analysis Fundamentals",
+    "category": "cybersecurity",
+    "description": "Safe lab isolation, static analysis (PE headers, strings, hashing), dynamic analysis in sandbox, and behavior monitoring.",
+    "difficulty": 4,
+    "estimated_hours": 40
+  },
+  {
+    "id": "security_compliance",
+    "name": "Security Governance, Risk & Compliance (GRC)",
+    "category": "cybersecurity",
+    "description": "NIST CSF, ISO/IEC 27001, GDPR, SOC 2, HIPAA requirements, risk assessment methodologies, and policy authoring.",
+    "difficulty": 2,
+    "estimated_hours": 25
+  },
+  {
+    "id": "cloud_security_posture",
+    "name": "Cloud Security Posture Management (CSPM)",
+    "category": "cybersecurity",
+    "description": "Detecting cloud misconfigurations, public S3 buckets, overly permissive security groups, and cloud compliance auditing.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "security_scripting_python",
+    "name": "Security Scripting & Automation with Python",
+    "category": "cybersecurity",
+    "description": "Automating security tasks, port scanning scripts, log parsers, interacting with threat APIs, and Scapy packet crafting.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "api_security_testing",
+    "name": "API Security Assessment & Testing",
+    "category": "cybersecurity",
+    "description": "OWASP API Top 10, broken object level authorization (BOLA), mass assignment, and automated Postman security tests.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "python_for_data_science",
+    "name": "Python for Data Science & Vectorized Computing",
+    "category": "data_ai_ml",
+    "description": "NumPy arrays, vectorized operations, broadcasting, indexing, slicing, and linear algebra operations.",
+    "difficulty": 2,
+    "estimated_hours": 30
+  },
+  {
+    "id": "pandas_data_wrangling",
+    "name": "Data Wrangling & Analysis with Pandas",
+    "category": "data_ai_ml",
+    "description": "DataFrames, Series, filtering, grouping, aggregation, pivoting, merging, and time series handling.",
+    "difficulty": 2,
+    "estimated_hours": 30
+  },
+  {
+    "id": "exploratory_data_analysis",
+    "name": "Exploratory Data Analysis & Visualization",
+    "category": "data_ai_ml",
+    "description": "Statistical summaries, distribution plots, heatmaps, outlier detection with Matplotlib and Seaborn.",
+    "difficulty": 2,
+    "estimated_hours": 25
+  },
+  {
+    "id": "linear_algebra_for_ml",
+    "name": "Applied Linear Algebra for Machine Learning",
+    "category": "data_ai_ml",
+    "description": "Matrix factorizations, SVD, PCA dimensionality reduction, projections, and tensor dimensions.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "multivariable_calc_optimization",
+    "name": "Calculus & Optimization for ML",
+    "category": "data_ai_ml",
+    "description": "Gradients, Jacobians, Hessians, gradient descent variants (SGD, Adam), learning rates, and loss surfaces.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "probability_statistics_for_data",
+    "name": "Probability & Inferential Statistics for ML",
+    "category": "data_ai_ml",
+    "description": "Hypothesis testing, p-values, confidence intervals, maximum likelihood estimation, and distributions.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "data_preprocessing_feature_eng",
+    "name": "Feature Engineering & Data Preprocessing",
+    "category": "data_ai_ml",
+    "description": "Imputation, one-hot/ordinal encoding, feature scaling, polynomial features, and target encoding.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "classical_machine_learning",
+    "name": "Supervised & Unsupervised Machine Learning",
+    "category": "data_ai_ml",
+    "description": "Linear/Logistic Regression, Decision Trees, Random Forests, Gradient Boosting (XGBoost/LightGBM), K-Means, DBSCAN.",
+    "difficulty": 3,
+    "estimated_hours": 40
+  },
+  {
+    "id": "model_evaluation_metrics",
+    "name": "Model Evaluation, Validation & Hyperparameter Tuning",
+    "category": "data_ai_ml",
+    "description": "Cross-validation, ROC-AUC, precision-recall curve, F1-score, confusion matrix, Grid/Random Search, and Optuna.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "deep_learning_fundamentals",
+    "name": "Deep Learning Fundamentals & Neural Networks",
+    "category": "data_ai_ml",
+    "description": "Multi-layer perceptrons, forward/backward propagation, activation functions (ReLU, GELU), and regularization (Dropout).",
+    "difficulty": 3,
+    "estimated_hours": 40
+  },
+  {
+    "id": "pytorch_framework",
+    "name": "Deep Learning with PyTorch",
+    "category": "data_ai_ml",
+    "description": "PyTorch tensors, autograd, nn.Module, Dataset/DataLoader, custom loss functions, and GPU acceleration with CUDA.",
+    "difficulty": 3,
+    "estimated_hours": 40
+  },
+  {
+    "id": "computer_vision_cnns",
+    "name": "Computer Vision & Convolutional Neural Networks",
+    "category": "data_ai_ml",
+    "description": "2D convolutions, pooling, modern CNN architectures (ResNet, EfficientNet), image augmentation, and transfer learning.",
+    "difficulty": 4,
+    "estimated_hours": 40
+  },
+  {
+    "id": "nlp_fundamentals",
+    "name": "Natural Language Processing Fundamentals",
+    "category": "data_ai_ml",
+    "description": "Text tokenization, stemming, TF-IDF, Word2Vec embeddings, recurrent networks (LSTM/GRU), and sequence modeling.",
+    "difficulty": 3,
+    "estimated_hours": 35
+  },
+  {
+    "id": "transformer_architectures",
+    "name": "Transformer Architectures & Attention Mechanisms",
+    "category": "data_ai_ml",
+    "description": "Self-attention mechanism, multi-head attention, positional encoding, encoder-only (BERT), and decoder-only (GPT).",
+    "difficulty": 4,
+    "estimated_hours": 45
+  },
+  {
+    "id": "large_language_models",
+    "name": "Large Language Models & Parameter-Efficient Fine-Tuning",
+    "category": "data_ai_ml",
+    "description": "Pretraining vs fine-tuning, PEFT/LoRA, quantization (bitsandbytes, GGUF), RLHF, and structured prompt engineering.",
+    "difficulty": 4,
+    "estimated_hours": 45
+  },
+  {
+    "id": "vector_databases",
+    "name": "Vector Databases & Semantic Search",
+    "category": "data_ai_ml",
+    "description": "Vector embeddings, cosine similarity, approximate nearest neighbor (HNSW/IVF), and vector DBs (Qdrant, Chroma).",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "rag_systems",
+    "name": "Retrieval-Augmented Generation (RAG) Architecture",
+    "category": "data_ai_ml",
+    "description": "Document chunking, hybrid search, dense retrieval, re-ranking, query expansion, LangChain, and LlamaIndex.",
+    "difficulty": 4,
+    "estimated_hours": 40
+  },
+  {
+    "id": "mlops_experiment_tracking",
+    "name": "MLOps Experiment Tracking & Model Registry",
+    "category": "data_ai_ml",
+    "description": "Tracking metrics and artifacts with MLflow / Weights & Biases, model lineage, model versioning, and staging.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "model_serving_apis",
+    "name": "Production Model Serving & Deployment",
+    "category": "data_ai_ml",
+    "description": "FastAPI model inference endpoints, ONNX runtime acceleration, batching inference, Dockerization, and latency tuning.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "big_data_spark",
+    "name": "Big Data Processing with Apache Spark",
+    "category": "data_ai_ml",
+    "description": "PySpark DataFrames, distributed transformations, partitioning, shuffle operations, and Spark SQL.",
+    "difficulty": 3,
+    "estimated_hours": 35
+  },
+  {
+    "id": "clean_code_solid",
+    "name": "Clean Code & SOLID Design Principles",
+    "category": "software_engineering_practices",
+    "description": "Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion.",
+    "difficulty": 2,
+    "estimated_hours": 25
+  },
+  {
+    "id": "design_patterns",
+    "name": "Software Design Patterns",
+    "category": "software_engineering_practices",
+    "description": "Factory, Singleton, Builder, Adapter, Decorator, Strategy, Observer, Repository, and Unit of Work.",
+    "difficulty": 3,
+    "estimated_hours": 30
+  },
+  {
+    "id": "software_architecture",
+    "name": "Software Architecture Paradigms",
+    "category": "software_engineering_practices",
+    "description": "Layered architecture, Clean Architecture, Onion Architecture, Hexagonal (Ports & Adapters), and DDD basics.",
+    "difficulty": 3,
+    "estimated_hours": 35
+  },
+  {
+    "id": "test_driven_development",
+    "name": "Test-Driven Development (TDD) & Testing Strategies",
+    "category": "software_engineering_practices",
+    "description": "Red-Green-Refactor cycle, test pyramids, unit vs integration testing, mocking, and mutation testing.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "agile_scrum",
+    "name": "Agile Methodologies & Scrum Delivery",
+    "category": "software_engineering_practices",
+    "description": "Scrum ceremonies, user stories, story estimation, sprint planning, retrospectives, and Kanban boards.",
+    "difficulty": 1,
+    "estimated_hours": 15
+  },
+  {
+    "id": "code_review_practices",
+    "name": "Code Review Standards & Team Collaboration",
+    "category": "software_engineering_practices",
+    "description": "Peer code review etiquette, automated linting integration, branch protection, and constructive feedback loops.",
+    "difficulty": 2,
+    "estimated_hours": 15
+  },
+  {
+    "id": "api_contract_design",
+    "name": "API Contract-First Design & Specifications",
+    "category": "software_engineering_practices",
+    "description": "Design-first API workflows, OpenAPI / JSON Schema authoring, client code generation, and contract testing.",
+    "difficulty": 2,
+    "estimated_hours": 20
+  },
+  {
+    "id": "devsecops_practices",
+    "name": "DevSecOps Principles & Secure Pipelines",
+    "category": "software_engineering_practices",
+    "description": "Static Application Security Testing (SAST), Software Composition Analysis (SCA), secret scanning in CI/CD.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "performance_profiling",
+    "name": "Application Performance Profiling & Benchmarking",
+    "category": "software_engineering_practices",
+    "description": "CPU profiling, memory leak detection, garbage collection analysis, benchmarking, and flame graphs.",
+    "difficulty": 3,
+    "estimated_hours": 25
+  },
+  {
+    "id": "technical_writing_docs",
+    "name": "Technical Writing & Architecture Decision Records (ADRs)",
+    "category": "software_engineering_practices",
+    "description": "Writing clear developer documentation, READMEs, Architecture Decision Records (ADR), and API documentation.",
+    "difficulty": 1,
+    "estimated_hours": 15
+  }
+]
