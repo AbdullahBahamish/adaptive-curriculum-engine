@@ -4,7 +4,7 @@
 > Fast, deterministic Directed Acyclic Graph (DAG) topological curriculum sequencing, semantic skill matching, and gap analysis engine.
 
 [![CI Pipeline](https://github.com/AbdullahBahamish/adaptive-curriculum-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/AbdullahBahamish/adaptive-curriculum-engine/actions/workflows/ci.yml)
-[![Python Version](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
+[![Python Version](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg)](https://fastapi.tiangolo.com/)
 [![NetworkX](https://img.shields.io/badge/NetworkX-3.4+-orange.svg)](https://networkx.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -91,6 +91,7 @@ The service will automatically:
 git clone https://github.com/AbdullahBahamish/adaptive-curriculum-engine.git
 cd adaptive-curriculum-engine
 
+# Requires Python 3.13
 python -m venv .venv
 # Windows:
 .venv\Scripts\activate

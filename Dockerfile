@@ -3,7 +3,7 @@
 # =============================================================================
 
 # Stage 1: Builder — install dependencies
-FROM python:3.11-slim AS builder
+FROM python:3.13-slim AS builder
 
 WORKDIR /build
 
@@ -13,12 +13,12 @@ RUN pip install --upgrade pip \
     && pip install --no-cache-dir ".[dev]" --target /build/deps
 
 # Stage 2: Production image
-FROM python:3.11-slim AS production
+FROM python:3.13-slim AS production
 
 WORKDIR /app
 
 # Copy installed packages from builder
-COPY --from=builder /build/deps /usr/local/lib/python3.11/site-packages
+COPY --from=builder /build/deps /usr/local/lib/python3.13/site-packages
 
 # Copy application configuration and source
 COPY pyproject.toml .

@@ -7,8 +7,13 @@ name = "adaptive-curriculum-engine"
 version = "0.1.0"
 description = "AI-powered skill gap analysis and learning path generation engine"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.13, <3.14"
 license = { text = "MIT" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only",
+]
 
 dependencies = [
     "fastapi>=0.115.0",
@@ -41,7 +46,7 @@ where = ["src"]
 [tool.ruff]
 src = ["src"]
 line-length = 100
-target-version = "py311"
+target-version = "py313"
 
 [tool.ruff.lint]
 select = ["E", "W", "F", "I", "B", "C4", "UP", "N", "SIM"]
@@ -51,7 +56,7 @@ ignore = []
 known-first-party = ["ace"]
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.13"
 strict = true
 warn_return_any = true
 warn_unused_configs = true
