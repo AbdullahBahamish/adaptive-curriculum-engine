@@ -1,5 +1,3 @@
-﻿version: "3.9"
-
 services:
   # PostgreSQL — owned exclusively by the AI Engine
   db:

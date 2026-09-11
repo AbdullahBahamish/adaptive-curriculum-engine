@@ -7,22 +7,27 @@ FROM python:3.13-slim AS builder
 
 WORKDIR /build
 
-COPY pyproject.toml .
-RUN pip install --upgrade pip \
-    && pip install --no-cache-dir build \
-    && pip install --no-cache-dir ".[dev]" --target /build/deps
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+COPY pyproject.toml README.md ./
+COPY src/ src/
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --upgrade pip \
+    && pip install --default-timeout=120 --retries=10 ".[dev]"
 
 # Stage 2: Production image
 FROM python:3.13-slim AS production
 
 WORKDIR /app
 
-# Copy installed packages from builder
-COPY --from=builder /build/deps /usr/local/lib/python3.13/site-packages
+# Copy virtual environment from builder
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 
 # Copy application configuration and source
-COPY pyproject.toml .
-COPY alembic.ini .
+COPY pyproject.toml README.md alembic.ini ./
 COPY alembic/ alembic/
 COPY src/ src/
 COPY data/ data/
