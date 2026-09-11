@@ -3,9 +3,10 @@
 Follows the Repository Pattern to decouple data persistence logic from
 the domain/application service layer.
 """
-from typing import Any, Generic, Type, TypeVar
-from sqlalchemy.orm import Session
+from typing import Any, Generic, TypeVar
+
 from sqlalchemy import select
+from sqlalchemy.orm import Session
 
 from ace.infrastructure.database.base import Base
 
@@ -15,7 +16,7 @@ ModelType = TypeVar("ModelType", bound=Base)
 class BaseRepository(Generic[ModelType]):
     """Generic CRUD repository for SQLAlchemy models."""
 
-    def __init__(self, model: Type[ModelType], db: Session):
+    def __init__(self, model: type[ModelType], db: Session):
         self.model = model
         self.db = db
 

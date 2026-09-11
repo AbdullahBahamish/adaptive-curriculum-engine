@@ -22,6 +22,10 @@ class GapAnalysisRequest(BaseModel):
         default_factory=list,
         description="Skills the learner has self-confirmed (Yes/No model)",
     )
+    mastery_states: dict[str, float] = Field(
+        default_factory=dict,
+        description="Optional probabilistic mastery map: skill_id -> mastery in [0, 1]",
+    )
 
 
 class SkillGapItem(BaseModel):
@@ -31,6 +35,11 @@ class SkillGapItem(BaseModel):
     difficulty: int
     estimated_hours: int
     is_mandatory: bool
+    gap_score: float = Field(default=0.0, description="Multi-factor priority score")
+    status: str = Field(default="MISSING", description="Categorical readiness and mastery status")
+    reason_codes: list[str] = Field(default_factory=list, description="Machine-readable justification codes")
+    mastery: float = Field(default=0.0, description="Current estimated mastery in [0, 1]")
+    prerequisite_impact: float = Field(default=1.0, description="Centrality impact on downstream skills")
 
 
 class GapAnalysisResponse(BaseModel):
@@ -60,15 +69,22 @@ def analyse_gaps(
     The C# backend sends:
     - The learner's current confirmed skill set (binary: have or don't have).
     - The target career ID.
+    - Optional probabilistic mastery values.
 
-    Returns a structured gap report ordered by importance.
+    Returns a structured, multi-factor gap report ordered by priority.
     """
     confirmed_ids = [s.skill_id for s in request.confirmed_skills]
+    from ace.domain.learner import SkillMasteryState
+    mastery_objs = {
+        sid: SkillMasteryState(skill_id=sid, estimated_mastery=score, confidence=0.8, evidence_count=1)
+        for sid, score in request.mastery_states.items()
+    }
     try:
         report = service.analyze_gaps(
             learner_id=request.learner_id,
             career_id=request.career_id,
             confirmed_skill_ids=confirmed_ids,
+            mastery_states=mastery_objs if mastery_objs else None,
         )
     except CareerNotFoundError as exc:
         raise HTTPException(
@@ -94,7 +110,12 @@ def analyse_gaps(
                 difficulty=g.skill.difficulty,
                 estimated_hours=g.skill.estimated_hours,
                 is_mandatory=mandatory_map.get(g.skill.id, True),
+                gap_score=g.gap_score,
+                status=str(g.status.value if hasattr(g.status, "value") else g.status),
+                reason_codes=g.reason_codes,
+                mastery=g.mastery,
+                prerequisite_impact=g.prerequisite_impact,
             )
             for g in report.gaps
         ],
-    )
+    )

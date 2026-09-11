@@ -1,6 +1,6 @@
 """Repository for Prerequisite relationships and graph edge hydration."""
+from sqlalchemy import and_, select
 from sqlalchemy.orm import Session
-from sqlalchemy import select, and_
 
 from ace.domain.prerequisite import Prerequisite
 from ace.infrastructure.database.models.prerequisite import PrerequisiteModel

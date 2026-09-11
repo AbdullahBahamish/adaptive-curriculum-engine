@@ -1,5 +1,5 @@
 """Skills management endpoints (sync and inspection from upstream C# backend)."""
-from typing import Optional
+
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from pydantic import BaseModel, Field
 
@@ -16,17 +16,17 @@ class SkillCreate(BaseModel):
     id: str = Field(description="Unique stable slug, e.g. 'html5'")
     name: str = Field(description="Human-readable title")
     category: str = Field(description="Domain category slug")
-    description: Optional[str] = Field(default="", description="Summary of the skill")
+    description: str | None = Field(default="", description="Summary of the skill")
     difficulty: int = Field(default=1, ge=1, le=5, description="Difficulty rating (1-5)")
     estimated_hours: int = Field(default=0, ge=0, description="Hours to acquire")
 
 
 class SkillUpdate(BaseModel):
-    name: Optional[str] = None
-    category: Optional[str] = None
-    description: Optional[str] = None
-    difficulty: Optional[int] = Field(default=None, ge=1, le=5)
-    estimated_hours: Optional[int] = Field(default=None, ge=0)
+    name: str | None = None
+    category: str | None = None
+    description: str | None = None
+    difficulty: int | None = Field(default=None, ge=1, le=5)
+    estimated_hours: int | None = Field(default=None, ge=0)
 
 
 class SkillResponse(BaseModel):
@@ -42,8 +42,8 @@ class SkillResponse(BaseModel):
 
 @router.get("", response_model=list[SkillResponse], summary="List skills")
 def list_skills(
-    category: Optional[str] = Query(None, description="Filter by category slug"),
-    search: Optional[str] = Query(None, description="Filter by name substring"),
+    category: str | None = Query(None, description="Filter by category slug"),
+    search: str | None = Query(None, description="Filter by name substring"),
     skip: int = Query(0, ge=0),
     limit: int = Query(100, ge=1, le=500),
     repo: SkillRepository = Depends(get_skill_repo),

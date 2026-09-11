@@ -1,6 +1,6 @@
 """Repository for Skills and domain model hydration."""
-from sqlalchemy.orm import Session
 from sqlalchemy import select
+from sqlalchemy.orm import Session
 
 from ace.domain.skill import DifficultyLevel, Skill
 from ace.infrastructure.database.models.skill import SkillModel

@@ -3,21 +3,31 @@
 This module creates the FastAPI app, registers middleware, and mounts
 all API routers. It is the single entry point consumed by Uvicorn.
 """
-from contextlib import asynccontextmanager
 from collections.abc import AsyncGenerator
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from ace.api.routes import (
+    careers,
+    gap_analysis,
+    health,
+    learning_path,
+    mastery,
+    prerequisites,
+    semantic,
+    skills,
+)
 from ace.core.config import settings
 from ace.core.logging import configure_logging, get_logger
-from ace.api.routes import health, skills, careers, prerequisites, gap_analysis, learning_path
 
 logger = get_logger(__name__)
 
 
+
 @asynccontextmanager
-async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
+async def lifespan(app: FastAPI) -> AsyncGenerator[None]:
     """Application lifespan: startup and shutdown logic."""
     configure_logging()
     logger.info(
@@ -63,8 +73,11 @@ def create_app() -> FastAPI:
     app.include_router(prerequisites.router, prefix=f"{prefix}/prerequisites", tags=["Prerequisites"])
     app.include_router(gap_analysis.router, prefix=prefix, tags=["Gap Analysis"])
     app.include_router(learning_path.router, prefix=prefix, tags=["Learning Path"])
+    app.include_router(mastery.router, prefix=prefix, tags=["Mastery"])
+    app.include_router(semantic.router, prefix=prefix, tags=["Semantic Matching"])
 
     return app
+
 
 
 app = create_app()

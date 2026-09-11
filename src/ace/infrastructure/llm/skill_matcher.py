@@ -1,28 +1,45 @@
 """Semantic skill matching between natural language input and standardized skill IDs."""
-from typing import Sequence
 import json
 import re
+from collections.abc import Sequence
 
 from ace.domain.skill import Skill
 from ace.infrastructure.llm.client import LLMProvider, MockLLMProvider, get_llm_provider
+from ace.semantic.vector_index import SkillVectorIndex
 
 
 class SkillMatcher:
     """Matches free-form text skill descriptions to curriculum skill IDs."""
 
-    def __init__(self, provider: LLMProvider | None = None):
+    def __init__(
+        self,
+        provider: LLMProvider | None = None,
+        vector_index: SkillVectorIndex | None = None,
+    ):
         self.provider = provider or get_llm_provider()
+        self.vector_index = vector_index
 
     def match_skills(self, text: str, available_skills: Sequence[Skill]) -> list[str]:
         """Return list of skill IDs that the text indicates the user possesses."""
         if not text.strip() or not available_skills:
             return []
 
+        available_ids = {s.id for s in available_skills}
+
+        # If vector index is available, leverage semantic vector search
+        if self.vector_index is not None and self.vector_index.is_indexed:
+            semantic_matches = self.vector_index.search(text, top_k=10, min_score=0.42)
+            vector_ids = [sid for sid, _ in semantic_matches if sid in available_ids]
+            # Also combine with heuristic to ensure high precision on exact keyword mentions
+            heuristic_ids = self._heuristic_match(text, available_skills)
+            return list(dict.fromkeys(heuristic_ids + vector_ids))
+
         # If Mock provider or LLM disabled, use keyword token matching
         if isinstance(self.provider, MockLLMProvider):
             return self._heuristic_match(text, available_skills)
 
         return self._llm_match(text, available_skills)
+
 
     def _heuristic_match(self, text: str, available_skills: Sequence[Skill]) -> list[str]:
         """Fast keyword/regex heuristic matcher."""

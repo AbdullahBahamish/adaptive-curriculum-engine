@@ -1,21 +1,25 @@
-﻿"""Graph Solver — generates an ordered learning path from skill gaps.
+"""Graph Solver — generates topologically sorted and multi-objective ranked learning paths.
 
-Uses topological sorting on the prerequisite DAG to produce a valid
-learning sequence: skills with no prerequisites come first, and each
-skill only appears after all its prerequisites have been satisfied.
-
-This is the core AI-enhanced decision making:
-  1. Start from the learner's gap skills.
-  2. Expand each gap to include any prerequisite skills the learner
-     is also missing (transitive prerequisites).
-  3. Run topological sort on the subgraph of gap skills only.
-  4. Return an ordered list of LearningStep objects.
+Coordinates:
+  1. Transitive ancestor expansion for missing prerequisite skills.
+  2. Bounded candidate pathway generation (Foundational, Goal-First, Quick-Wins, Clustered, Beam).
+  3. Normalized multi-objective scoring (Goal alignment, smoothness, gap reduction, time budget).
+  4. Pareto frontier analysis and trade-off summarization.
+  5. Machine-readable step reason codes and unblock metrics.
 """
 import networkx as nx
 
-from ace.domain.learning_path import LearningPath, LearningStep
+from ace.domain.career import Career, CareerSkillRequirement
+from ace.domain.learner import ConfirmedSkill, LearnerProfile
+from ace.domain.learning_path import LearningPath
 from ace.domain.skill import Skill, SkillGap
+from ace.explain.structured_rationale import populate_step_rationales
+from ace.graph.graph_metrics import get_graph_metrics
 from ace.graph.validator import validate_graph
+from ace.planner.candidate_generator import CandidatePathwayGenerator
+from ace.planner.pareto import ParetoCandidate, ParetoOptimizer
+from ace.planner.scorer import MultiObjectivePathScorer
+from ace.ranking.ranker import PathRanker, RuleBasedRanker
 
 
 def generate_learning_path(
@@ -25,78 +29,150 @@ def generate_learning_path(
     career_id: str,
     career_name: str,
     confirmed_skill_ids: set[str],
+    career: Career | None = None,
+    learner: LearnerProfile | None = None,
+    all_skills: dict[str, Skill] | None = None,
+    ranker: PathRanker | None = None,
+    strategy: str | None = None,
+    return_alternatives: bool = False,
 ) -> LearningPath:
-    """Generate a topologically sorted learning path from skill gaps.
+    """Generate an optimal, prerequisite-safe, multi-objective learning path.
 
-    Args:
-        gaps: Skills the learner is missing.
-        graph: The full prerequisite DAG (all skills).
-        learner_id: Identifier of the learner.
-        career_id: Identifier of the target career.
-        career_name: Display name of the target career.
-        confirmed_skill_ids: Skills the learner already has (excluded from path).
-
-    Returns:
-        A LearningPath with ordered LearningStep entries.
+    Backward compatible with the v0.1 signature while executing the full
+    candidate generation, Pareto optimization, and ranking pipeline.
     """
-    # Validate the graph is a DAG before proceeding
     validate_graph(graph)
+    metrics = get_graph_metrics(graph)
 
     gap_ids = {g.skill.id for g in gaps}
 
-    # Expand gaps to include transitive prerequisites the learner is also missing
+    # Transitive expansion of missing prerequisite ancestors
     expanded_ids: set[str] = set()
     for gap_id in gap_ids:
         if gap_id in graph:
-            ancestors = nx.ancestors(graph, gap_id)
+            ancestors = metrics.get_ancestors(gap_id)
             missing_ancestors = ancestors - confirmed_skill_ids
             expanded_ids.update(missing_ancestors)
     expanded_ids.update(gap_ids)
 
-    # Build a subgraph containing only the skills we need to learn
+    if not expanded_ids:
+        return LearningPath(
+            learner_id=learner_id,
+            career_id=career_id,
+            career_name=career_name,
+            total_skills=0,
+            total_estimated_hours=0,
+            steps=[],
+        )
+
     subgraph = graph.subgraph(expanded_ids)
 
-    # Topological sort gives us a valid learning order
-    ordered_skill_ids = list(nx.topological_sort(subgraph))
+    # Reconstruct or adapt career & learner if legacy callers didn't pass full models
+    if career is None:
+        career = Career(
+            id=career_id,
+            name=career_name,
+            required_skills=[
+                CareerSkillRequirement(
+                    skill_id=g.skill.id,
+                    is_mandatory=g.is_mandatory,
+                    importance=3,
+                )
+                for g in gaps
+            ],
+        )
 
-    # Build the step-by-step learning path
-    gap_skill_map: dict[str, Skill] = {g.skill.id: g.skill for g in gaps}
-    steps: list[LearningStep] = []
+    if learner is None:
+        learner = LearnerProfile(
+            id=learner_id,
+            confirmed_skills=[ConfirmedSkill(skill_id=sid) for sid in confirmed_skill_ids],
+        )
 
-    for order, skill_id in enumerate(ordered_skill_ids, start=1):
-        node_data = graph.nodes.get(skill_id, {})
-        prereq_ids = list(graph.predecessors(skill_id))
-        # Only list prerequisites that are within the learning path itself
-        path_prereqs = [p for p in prereq_ids if p in expanded_ids]
+    # 1. Candidate Pathway Generation
+    generator = CandidatePathwayGenerator(
+        subgraph=subgraph,
+        career=career,
+        learner=learner,
+        all_skills=all_skills,
+        metrics=metrics,
+    )
 
-        skill = gap_skill_map.get(skill_id)
-        steps.append(
-            LearningStep(
-                order=order,
-                skill_id=skill_id,
-                skill_name=node_data.get("name", skill_id),
-                category=node_data.get("category", "General"),
-                estimated_hours=node_data.get("estimated_hours", 0),
-                rationale=_build_rationale(skill_id, path_prereqs, node_data),
-                prerequisites_satisfied=path_prereqs,
+    if strategy == "foundational_first":
+        candidates = [generator.generate_foundational_first()]
+    elif strategy == "career_goal_first":
+        candidates = [generator.generate_goal_first()]
+    elif strategy == "quick_wins":
+        candidates = [generator.generate_quick_wins()]
+    elif strategy == "domain_clustered":
+        candidates = [generator.generate_domain_clustered()]
+    elif strategy == "bounded_beam_search":
+        candidates = [generator.generate_beam_search()]
+    else:
+        candidates = generator.generate_all(beam_width=5, time_budget_ms=20.0)
+
+    # 2. Multi-Objective Scoring
+    scorer = MultiObjectivePathScorer(
+        career=career,
+        learner=learner,
+        subgraph=subgraph,
+        gaps=gaps,
+    )
+
+    scored_candidates: list[ParetoCandidate] = []
+    for cand in candidates:
+        scores = scorer.score_path(cand.skill_ids)
+        scored_candidates.append(
+            ParetoCandidate(
+                strategy=cand.strategy,
+                skill_ids=cand.skill_ids,
+                scores=scores,
             )
         )
 
-    total_hours = sum(s.estimated_hours for s in steps)
+    # 3. Pareto Frontier Analysis
+    pareto_optimizer = ParetoOptimizer()
+    frontier = pareto_optimizer.extract_frontier(scored_candidates)
 
-    return LearningPath(
-        learner_id=learner_id,
-        career_id=career_id,
-        career_name=career_name,
-        total_skills=len(steps),
-        total_estimated_hours=total_hours,
-        steps=steps,
+    # 4. Build Enriched Candidate Paths
+    built_paths: list[LearningPath] = []
+    for cand in scored_candidates:
+        steps = populate_step_rationales(
+            path_skill_ids=cand.skill_ids,
+            graph=graph,
+            career=career,
+            gaps=gaps,
+            metrics=metrics,
+        )
+        total_hours = sum(s.estimated_hours for s in steps)
+        built_paths.append(
+            LearningPath(
+                learner_id=learner_id,
+                career_id=career_id,
+                career_name=career_name,
+                total_skills=len(steps),
+                total_estimated_hours=total_hours,
+                steps=steps,
+                strategy=cand.strategy,
+                objective_scores=cand.scores.to_dict(),
+                composite_score=cand.scores.composite_score,
+            )
+        )
+
+    # 5. Ranking
+    active_ranker = ranker or RuleBasedRanker()
+    ranked_paths = active_ranker.rank_paths(built_paths, learner)
+    recommended = ranked_paths[0]
+
+    # 6. Synthesize Pareto Trade-off Explanations
+    rec_pareto = next(
+        (c for c in scored_candidates if c.strategy == recommended.strategy),
+        scored_candidates[0],
     )
+    alt_paretos = [c for c in scored_candidates if c.strategy != recommended.strategy]
+    tradeoffs = pareto_optimizer.explain_tradeoffs(rec_pareto, alt_paretos)
 
+    recommended.pareto_tradeoffs = [t.to_dict() for t in tradeoffs]
+    if return_alternatives:
+        recommended.alternative_paths = [p for p in ranked_paths if p.strategy != recommended.strategy]
 
-def _build_rationale(skill_id: str, prereqs: list[str], node_data: dict) -> str:
-    """Generate a deterministic textual rationale for a learning step."""
-    if not prereqs:
-        return f"'{node_data.get('name', skill_id)}' has no prerequisites — start here."
-    prereq_names = ", ".join(f"'{p}'" for p in prereqs[:3])
-    return f"Requires {prereq_names} to be completed first."
+    return recommended

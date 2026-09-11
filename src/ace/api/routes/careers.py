@@ -1,6 +1,6 @@
 """Careers management endpoints (sync and inspection from upstream C# backend)."""
-from typing import Optional
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+
+from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, Field
 
 from ace.api.dependencies import get_career_repo, get_skill_repo, verify_api_key
@@ -22,13 +22,13 @@ class CareerSkillReqItem(BaseModel):
 class CareerCreate(BaseModel):
     id: str = Field(description="Unique stable slug, e.g. 'frontend_developer'")
     name: str = Field(description="Display title")
-    description: Optional[str] = Field(default="")
+    description: str | None = Field(default="")
     required_skills: list[CareerSkillReqItem] = Field(default_factory=list)
 
 
 class CareerUpdate(BaseModel):
-    name: Optional[str] = None
-    description: Optional[str] = None
+    name: str | None = None
+    description: str | None = None
 
 
 class CareerResponse(BaseModel):

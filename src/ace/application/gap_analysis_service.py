@@ -1,13 +1,14 @@
 """Application Service for Skill Gap Analysis."""
+from collections.abc import Sequence
 from dataclasses import dataclass
-from typing import Sequence
 
 from ace.core.exceptions import CareerNotFoundError
 from ace.domain.career import Career
-from ace.domain.learner import ConfirmedSkill, LearnerProfile
+from ace.domain.learner import ConfirmedSkill, LearnerProfile, SkillMasteryState
 from ace.domain.skill import SkillGap
-from ace.graph.gap_analyzer import compute_skill_gaps
+from ace.graph import build_prerequisite_graph, compute_skill_gaps
 from ace.infrastructure.database.repos.career_repo import CareerRepository
+from ace.infrastructure.database.repos.prerequisite_repo import PrerequisiteRepository
 from ace.infrastructure.database.repos.skill_repo import SkillRepository
 
 
@@ -28,15 +29,23 @@ class GapAnalysisReport:
 class GapAnalysisService:
     """Orchestrates skill gap evaluation between a learner and career profile."""
 
-    def __init__(self, career_repo: CareerRepository, skill_repo: SkillRepository):
+    def __init__(
+        self,
+        career_repo: CareerRepository,
+        skill_repo: SkillRepository,
+        prereq_repo: PrerequisiteRepository | None = None,
+    ):
         self.career_repo = career_repo
         self.skill_repo = skill_repo
+        self.prereq_repo = prereq_repo
 
     def analyze_gaps(
         self,
         learner_id: str,
         career_id: str,
-        confirmed_skill_ids: Sequence[str],
+        confirmed_skill_ids: Sequence[str] = (),
+        mastery_states: dict[str, SkillMasteryState] | None = None,
+        learner_profile: LearnerProfile | None = None,
     ) -> GapAnalysisReport:
         """Analyze gaps between confirmed skills and target career requirements.
 
@@ -52,12 +61,23 @@ class GapAnalysisService:
         skill_models = self.skill_repo.get_by_ids(required_skill_ids)
         skill_map = {sm.id: self.skill_repo.to_domain(sm) for sm in skill_models}
 
-        learner = LearnerProfile(
-            id=learner_id,
-            confirmed_skills=[ConfirmedSkill(skill_id=sid) for sid in confirmed_skill_ids],
-        )
+        if learner_profile is not None:
+            learner = learner_profile
+        else:
+            learner = LearnerProfile(
+                id=learner_id,
+                confirmed_skills=[ConfirmedSkill(skill_id=sid) for sid in confirmed_skill_ids],
+                mastery_states=mastery_states or {},
+            )
 
-        gaps = compute_skill_gaps(career=career, learner=learner, all_skills=skill_map)
+        # Build graph for prerequisite impact if repo is provided
+        graph = None
+        if self.prereq_repo is not None:
+            all_skills = self.skill_repo.list_all_domain()
+            all_prereqs = self.prereq_repo.list_all_domain()
+            graph = build_prerequisite_graph(all_skills, all_prereqs)
+
+        gaps = compute_skill_gaps(career=career, learner=learner, all_skills=skill_map, graph=graph)
 
         total_required = len(career.required_skills)
         skills_missing = len(gaps)
@@ -75,3 +95,4 @@ class GapAnalysisService:
             gaps=gaps,
             career=career,
         )
+

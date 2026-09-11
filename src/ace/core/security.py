@@ -5,7 +5,7 @@ This module provides:
   - `verify_api_key`  : FastAPI dependency for route-level enforcement.
   - `APIKeyMiddleware`: Starlette middleware for global enforcement.
 """
-from fastapi import Depends, HTTPException, Security, status
+from fastapi import HTTPException, Security, status
 from fastapi.security import APIKeyHeader
 
 from ace.core.config import settings

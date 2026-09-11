@@ -1,7 +1,6 @@
 ﻿"""SQLAlchemy declarative base shared by all ORM models."""
-from sqlalchemy.orm import DeclarativeBase, MappedColumn, mapped_column
-from sqlalchemy import String
-import uuid
+
+from sqlalchemy.orm import DeclarativeBase
 
 
 class Base(DeclarativeBase):

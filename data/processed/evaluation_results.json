@@ -1,0 +1,62 @@
+[
+  {
+    "condition": "C1: Baseline (v0.1)",
+    "description": "Arbitrary single topological sort, binary knowledge",
+    "prereq_violations_pct": 0.0,
+    "goal_alignment_at_10": 0.8621,
+    "smoothness_index": 0.8861,
+    "latency_ms": 2.75,
+    "memory_mb": 2.81,
+    "ndcg_at_10": 0.5719
+  },
+  {
+    "condition": "C2: Baseline + Semantic",
+    "description": "Semantic skill extraction into confirmed state",
+    "prereq_violations_pct": 0.0,
+    "goal_alignment_at_10": 0.8621,
+    "smoothness_index": 0.8861,
+    "latency_ms": 2.83,
+    "memory_mb": 2.81,
+    "ndcg_at_10": 0.5719
+  },
+  {
+    "condition": "C3: Baseline + BKT",
+    "description": "Bayesian Knowledge Tracing mastery thresholds",
+    "prereq_violations_pct": 0.0,
+    "goal_alignment_at_10": 0.8584,
+    "smoothness_index": 0.8809,
+    "latency_ms": 3.01,
+    "memory_mb": 2.81,
+    "ndcg_at_10": 0.5332
+  },
+  {
+    "condition": "C4: BKT + Weighted Gaps",
+    "description": "Multi-factor gap priority (Importance x Impact x (1-Mastery))",
+    "prereq_violations_pct": 0.0,
+    "goal_alignment_at_10": 0.8584,
+    "smoothness_index": 0.8809,
+    "latency_ms": 2.43,
+    "memory_mb": 2.81,
+    "ndcg_at_10": 0.5332
+  },
+  {
+    "condition": "C5: Candidate Gen + Ranking",
+    "description": "5 topological archetypes + multi-objective ranking",
+    "prereq_violations_pct": 0.0,
+    "goal_alignment_at_10": 0.8784,
+    "smoothness_index": 0.9135,
+    "latency_ms": 31.66,
+    "memory_mb": 2.81,
+    "ndcg_at_10": 0.7519
+  },
+  {
+    "condition": "C6: Full Hybrid ACE System",
+    "description": "BKT + Vector Index + Multi-Objective + Pareto + Structured Explanations",
+    "prereq_violations_pct": 0.0,
+    "goal_alignment_at_10": 0.8711,
+    "smoothness_index": 0.8945,
+    "latency_ms": 56.53,
+    "memory_mb": 2.81,
+    "ndcg_at_10": 0.6627
+  }
+]

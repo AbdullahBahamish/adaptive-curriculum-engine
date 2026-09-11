@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 from ace.api.dependencies import get_prerequisite_repo, get_skill_repo, verify_api_key
 from ace.domain.prerequisite import Prerequisite
 from ace.graph import build_prerequisite_graph
-from ace.graph.validator import validate_graph, CycleDetectedError
+from ace.graph.validator import CycleDetectedError, validate_graph
 from ace.infrastructure.database.models.prerequisite import PrerequisiteModel
 from ace.infrastructure.database.repos.prerequisite_repo import PrerequisiteRepository
 from ace.infrastructure.database.repos.skill_repo import SkillRepository

@@ -4,7 +4,8 @@ Designed following the Strategy Pattern:
 - Supports Mock (offline/local fallback), OpenAI-compatible APIs, and Google Gemini.
 - Does not block or fail the primary microservice if LLM is disabled or offline.
 """
-from typing import Protocol, Optional
+from typing import Protocol
+
 import httpx
 
 from ace.core.config import settings
@@ -16,7 +17,7 @@ logger = get_logger(__name__)
 class LLMProvider(Protocol):
     """Protocol for LLM completions."""
 
-    def complete(self, prompt: str, system_prompt: Optional[str] = None) -> str:
+    def complete(self, prompt: str, system_prompt: str | None = None) -> str:
         """Generate text completion from prompt."""
         ...
 
@@ -24,7 +25,7 @@ class LLMProvider(Protocol):
 class MockLLMProvider:
     """Deterministic fallback provider when external LLM is disabled."""
 
-    def complete(self, prompt: str, system_prompt: Optional[str] = None) -> str:
+    def complete(self, prompt: str, system_prompt: str | None = None) -> str:
         logger.debug("mock_llm_complete_invoked", prompt_length=len(prompt))
         return (
             "This personalized curriculum has been topologically sequenced according to "
@@ -41,7 +42,7 @@ class OpenAILLMProvider:
         self.model = model
         self.base_url = base_url
 
-    def complete(self, prompt: str, system_prompt: Optional[str] = None) -> str:
+    def complete(self, prompt: str, system_prompt: str | None = None) -> str:
         messages = []
         if system_prompt:
             messages.append({"role": "system", "content": system_prompt})

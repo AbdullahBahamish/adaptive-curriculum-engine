@@ -5,7 +5,7 @@ Import the singleton `settings` object wherever config is needed.
 """
 from functools import lru_cache
 
-from pydantic import Field, PostgresDsn
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -60,7 +60,30 @@ class Settings(BaseSettings):
         default="all-MiniLM-L6-v2",
         description="Sentence-transformers model for semantic skill matching",
     )
-    embeddings_enabled: bool = Field(default=False, description="Enable semantic skill matching")
+    embeddings_enabled: bool = Field(default=True, description="Enable semantic skill matching")
+    canonical_embeddings_path: str = Field(
+        default="data/processed/canonical_skill_embeddings.json",
+        description="Path to precomputed canonical skill embeddings",
+    )
+    embeddings_cache_path: str = Field(
+        default="data/processed/embeddings_cache.json",
+        description="Path to persistent runtime query embedding cache",
+    )
+
+    # ------------------------------------------------------------------
+    # Bayesian Knowledge Tracing (BKT) Defaults
+    # ------------------------------------------------------------------
+    bkt_p_l0: float = Field(default=0.10, ge=0.0, le=1.0, description="Prior knowledge probability")
+    bkt_p_t: float = Field(default=0.15, ge=0.0, le=1.0, description="Learning transition rate")
+    bkt_p_g: float = Field(default=0.20, ge=0.0, le=1.0, description="Guess probability")
+    bkt_p_s: float = Field(default=0.10, ge=0.0, le=1.0, description="Slip probability")
+
+    # ------------------------------------------------------------------
+    # Candidate Pathway Generation & Search
+    # ------------------------------------------------------------------
+    beam_search_width: int = Field(default=5, ge=1, le=50, description="Beam search width")
+    beam_search_time_budget_ms: float = Field(default=20.0, ge=1.0, description="Search time budget in ms")
+
 
     # ------------------------------------------------------------------
     # API

@@ -1,6 +1,6 @@
 """Repository for Career profiles and skill requirements."""
+from sqlalchemy import and_, select
 from sqlalchemy.orm import Session, selectinload
-from sqlalchemy import select, and_
 
 from ace.domain.career import Career, CareerSkillRequirement
 from ace.infrastructure.database.models.career import CareerModel, CareerSkillModel

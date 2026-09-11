@@ -1,4 +1,4 @@
-﻿"""Graph engine package.
+"""Graph engine package.
 
 Exposes:
   - build_prerequisite_graph: builds the NetworkX DAG
@@ -8,6 +8,7 @@ Exposes:
 """
 from ace.graph.builder import build_prerequisite_graph
 from ace.graph.gap_analyzer import compute_skill_gaps
+from ace.graph.graph_metrics import PrerequisiteGraphMetrics, get_graph_metrics
 from ace.graph.solver import generate_learning_path
 from ace.graph.validator import validate_graph
 
@@ -16,4 +17,6 @@ __all__ = [
     "validate_graph",
     "compute_skill_gaps",
     "generate_learning_path",
-]
+    "PrerequisiteGraphMetrics",
+    "get_graph_metrics",
+]
