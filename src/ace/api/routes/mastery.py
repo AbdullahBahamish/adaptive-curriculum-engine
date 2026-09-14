@@ -14,6 +14,7 @@ class EvidenceUpdate(BaseModel):
     evidence: float | bool = Field(description="Boolean pass/fail or continuous score in [0.0, 1.0]")
     evidence_id: str | None = Field(default=None, description="Assessment or quiz identifier")
     difficulty: int | None = Field(default=None, ge=1, le=5, description="Item difficulty level")
+    timestamp: str | None = Field(default=None, description="ISO timestamp of the interaction")
 
 
 class BatchEvidenceUpdate(BaseModel):
@@ -26,6 +27,9 @@ class SkillMasteryOut(BaseModel):
     estimated_mastery: float
     confidence: float
     evidence_count: int
+    success_count: int = 0
+    failure_count: int = 0
+    predicted_performance: float | None = None
     last_evidence: str | None
     difficulty_history: list[int]
 
@@ -54,6 +58,9 @@ def update_mastery(
         estimated_mastery=updated.estimated_mastery,
         confidence=updated.confidence,
         evidence_count=updated.evidence_count,
+        success_count=updated.success_count,
+        failure_count=updated.failure_count,
+        predicted_performance=updated.predicted_performance,
         last_evidence=updated.last_evidence,
         difficulty_history=updated.difficulty_history,
     )
@@ -80,6 +87,9 @@ def batch_update_mastery(
                 estimated_mastery=updated.estimated_mastery,
                 confidence=updated.confidence,
                 evidence_count=updated.evidence_count,
+                success_count=updated.success_count,
+                failure_count=updated.failure_count,
+                predicted_performance=updated.predicted_performance,
                 last_evidence=updated.last_evidence,
                 difficulty_history=updated.difficulty_history,
             )
@@ -100,6 +110,9 @@ def get_learner_mastery(
             estimated_mastery=st.estimated_mastery,
             confidence=st.confidence,
             evidence_count=st.evidence_count,
+            success_count=st.success_count,
+            failure_count=st.failure_count,
+            predicted_performance=st.predicted_performance,
             last_evidence=st.last_evidence,
             difficulty_history=st.difficulty_history,
         )

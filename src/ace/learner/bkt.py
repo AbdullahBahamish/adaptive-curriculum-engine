@@ -48,32 +48,53 @@ class BKTParameters:
 class BKTModel:
     """Resource-efficient Bayesian Knowledge Tracing engine.
 
-    Requires zero GPU/neural dependencies. Executes in < 0.005ms per update on CPU.
+    Supports:
+    - Hierarchical parameter resolution (skill-specific -> category -> global default)
+    - Conformance to MasteryEstimator and KnowledgeTracer capability protocols
+    - Fast CPU execution (< 0.005ms per update)
     """
 
-    def __init__(self, params: BKTParameters | None = None) -> None:
+    def __init__(
+        self,
+        params: BKTParameters | None = None,
+        skill_params: dict[str, BKTParameters] | None = None,
+        category_params: dict[str, BKTParameters] | None = None,
+    ) -> None:
         self.params = params or BKTParameters()
+        self.skill_params = skill_params or {}
+        self.category_params = category_params or {}
+
+    def get_params_for_skill(self, skill_id: str, category: str | None = None) -> BKTParameters:
+        """Hierarchical parameter resolution: skill -> category -> global default."""
+        if skill_id in self.skill_params:
+            return self.skill_params[skill_id]
+        if category and category in self.category_params:
+            return self.category_params[category]
+        return self.params
 
     def update(
         self,
         current_mastery: float,
         evidence: float | bool,
         evidence_count: int,
+        params: BKTParameters | None = None,
     ) -> tuple[float, float]:
-        """Compute the posterior probability of mastery and updated confidence.
+        """Compute posterior probability of mastery and updated confidence.
 
         Args:
             current_mastery: Prior P(L_{t-1}) in [0, 1].
             evidence: Boolean (True=success, False=failure) or continuous score in [0, 1].
             evidence_count: Number of previous observations.
+            params: Optional specific BKTParameters to use (defaults to self.params).
 
         Returns:
             tuple of (updated_mastery, confidence) both in [0.0, 1.0].
         """
+        active_params = params or self.params
         prior = max(0.001, min(0.999, current_mastery))
-        p_s = self.params.p_s
-        p_g = self.params.p_g
-        p_t = self.params.p_t
+        p_s = active_params.p_s
+        p_g = active_params.p_g
+        p_t = active_params.p_t
 
         if isinstance(evidence, bool):
             score = 1.0 if evidence else 0.0
@@ -114,12 +135,15 @@ class BKTModel:
         evidence: float | bool,
         evidence_id: str | None = None,
         difficulty: int | None = None,
+        category: str | None = None,
     ) -> SkillMasteryState:
-        """Convenience method to return a new SkillMasteryState with updated values."""
+        """Return a new SkillMasteryState with updated values resolved via hierarchical params."""
+        skill_params = self.get_params_for_skill(state.skill_id, category=category)
         new_mastery, new_conf = self.update(
             current_mastery=state.estimated_mastery,
             evidence=evidence,
             evidence_count=state.evidence_count,
+            params=skill_params,
         )
         new_history = list(state.difficulty_history)
         if difficulty is not None:
@@ -130,11 +154,20 @@ class BKTModel:
             estimated_mastery=new_mastery,
             confidence=new_conf,
             evidence_count=state.evidence_count + 1,
+            success_count=state.success_count,
+            failure_count=state.failure_count,
+            predicted_performance=state.predicted_performance,
             last_evidence=evidence_id or state.last_evidence,
             difficulty_history=new_history,
+            last_updated_at=state.last_updated_at,
         )
 
-    def predict_correctness(self, mastery: float) -> float:
+    def estimate_mastery(self, state: SkillMasteryState) -> float:
+        """Conforms to MasteryEstimator capability protocol."""
+        return state.estimated_mastery
+
+    def predict_correctness(self, mastery: float, params: BKTParameters | None = None) -> float:
         """P(correct observation) = P(L) * (1 - P(S)) + (1 - P(L)) * P(G)."""
+        active_params = params or self.params
         m = max(0.0, min(1.0, mastery))
-        return (m * (1.0 - self.params.p_s)) + ((1.0 - m) * self.params.p_g)
+        return (m * (1.0 - active_params.p_s)) + ((1.0 - m) * active_params.p_g)

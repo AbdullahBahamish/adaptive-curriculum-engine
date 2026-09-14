@@ -158,4 +158,4 @@ def generate_path(
             )
             for s in path.steps
         ],
-    )
+    )

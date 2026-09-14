@@ -20,13 +20,22 @@ class LearningPreferences(BaseModel):
 
 
 class SkillMasteryState(BaseModel):
-    """Estimated probabilistic mastery of an individual skill."""
+    """Estimated probabilistic mastery and practice history for an individual skill.
+
+    Note: `predicted_performance` represents predicted probability of future response correctness
+    (e.g., from PFA), which is semantically distinct from `estimated_mastery` (latent competency).
+    Downstream curriculum planners must strictly consume `estimated_mastery`.
+    """
     skill_id: str = Field(description="References Skill.id")
     estimated_mastery: float = Field(default=0.0, ge=0.0, le=1.0, description="P(mastery) in [0, 1]")
     confidence: float = Field(default=0.5, ge=0.0, le=1.0, description="Confidence in estimation")
     evidence_count: int = Field(default=0, ge=0, description="Number of observed evaluations/interactions")
+    success_count: int = Field(default=0, ge=0, description="Cumulative count of successful observations")
+    failure_count: int = Field(default=0, ge=0, description="Cumulative count of failed observations")
+    predicted_performance: float | None = Field(default=None, ge=0.0, le=1.0, description="Predicted response correctness; NOT mastery")
     last_evidence: str | None = Field(default=None, description="Identifier of last assessment/quiz")
     difficulty_history: list[int] = Field(default_factory=list, description="Historical item difficulties")
+    last_updated_at: str | None = Field(default=None, description="ISO timestamp of last state update")
 
 
 class ConfirmedSkill(BaseModel):
@@ -92,6 +101,10 @@ class LearnerProfile(BaseModel):
             estimated_mastery=max(0.0, min(1.0, mastery)),
             confidence=max(0.0, min(1.0, confidence)),
             evidence_count=new_count,
+            success_count=existing.success_count if existing else 0,
+            failure_count=existing.failure_count if existing else 0,
+            predicted_performance=existing.predicted_performance if existing else None,
             last_evidence=last_evidence,
             difficulty_history=list(existing.difficulty_history) if existing else [],
+            last_updated_at=existing.last_updated_at if existing else None,
         )
