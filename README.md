@@ -174,7 +174,7 @@ pytest -v
 pytest --cov=ace --cov-report=term-missing
 ```
 
-All 27 automated tests run in sub-second execution (< 0.6s) using in-memory SQLite and mock dependencies.
+All 68 automated tests validate graph algorithms, Bayesian mastery models, candidate generation, Pareto scoring, REST APIs, and database persistence.
 
 ---
 
