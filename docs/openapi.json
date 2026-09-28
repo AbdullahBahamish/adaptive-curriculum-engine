@@ -1,0 +1,2346 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ACE AI Engine",
+    "description": "AI-powered skill gap analysis and learning path generation engine. Consumed by the C# ASP.NET Core backend via REST.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Service liveness check",
+        "description": "Returns service status. No auth required.",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/skills": {
+      "get": {
+        "tags": [
+          "Skills"
+        ],
+        "summary": "List skills",
+        "description": "Retrieve skills, optionally filtered by category or search query.",
+        "operationId": "list_skills_api_v1_skills_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by category slug",
+              "title": "Category"
+            },
+            "description": "Filter by category slug"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by name substring",
+              "title": "Search"
+            },
+            "description": "Filter by name substring"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Skip"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 500,
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SkillResponse"
+                  },
+                  "title": "Response List Skills Api V1 Skills Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Skills"
+        ],
+        "summary": "Create a new skill",
+        "description": "Create a new skill record.",
+        "operationId": "create_skill_api_v1_skills_post",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SkillCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/skills/{skill_id}": {
+      "get": {
+        "tags": [
+          "Skills"
+        ],
+        "summary": "Get skill by ID",
+        "description": "Fetch single skill details by its ID slug.",
+        "operationId": "get_skill_api_v1_skills__skill_id__get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "skill_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Skill Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Skills"
+        ],
+        "summary": "Update an existing skill",
+        "description": "Update properties of an existing skill.",
+        "operationId": "update_skill_api_v1_skills__skill_id__put",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "skill_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Skill Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SkillUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Skills"
+        ],
+        "summary": "Delete a skill",
+        "description": "Delete a skill and cascade-remove its associated prerequisite edges.",
+        "operationId": "delete_skill_api_v1_skills__skill_id__delete",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "skill_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Skill Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/careers": {
+      "get": {
+        "tags": [
+          "Careers"
+        ],
+        "summary": "List all careers",
+        "description": "List all available careers with their required skills.",
+        "operationId": "list_careers_api_v1_careers_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CareerResponse"
+                  },
+                  "type": "array",
+                  "title": "Response List Careers Api V1 Careers Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Careers"
+        ],
+        "summary": "Create a new career",
+        "description": "Create a new career track with optional initial required skills.",
+        "operationId": "create_career_api_v1_careers_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CareerCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CareerResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/v1/careers/{career_id}": {
+      "get": {
+        "tags": [
+          "Careers"
+        ],
+        "summary": "Get career by ID",
+        "description": "Fetch single career profile and required skills.",
+        "operationId": "get_career_api_v1_careers__career_id__get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "career_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Career Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CareerResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Careers"
+        ],
+        "summary": "Update career details",
+        "description": "Update title or description of a career.",
+        "operationId": "update_career_api_v1_careers__career_id__put",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "career_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Career Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CareerUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CareerResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Careers"
+        ],
+        "summary": "Delete a career",
+        "description": "Delete a career track.",
+        "operationId": "delete_career_api_v1_careers__career_id__delete",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "career_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Career Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/careers/{career_id}/skills": {
+      "post": {
+        "tags": [
+          "Careers"
+        ],
+        "summary": "Attach skill to career",
+        "description": "Add or update a skill requirement for a career.",
+        "operationId": "attach_skill_to_career_api_v1_careers__career_id__skills_post",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "career_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Career Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CareerSkillReqItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CareerSkillReqItem"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/careers/{career_id}/skills/{skill_id}": {
+      "delete": {
+        "tags": [
+          "Careers"
+        ],
+        "summary": "Detach skill from career",
+        "description": "Remove a skill requirement from a career.",
+        "operationId": "detach_skill_from_career_api_v1_careers__career_id__skills__skill_id__delete",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "career_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Career Id"
+            }
+          },
+          {
+            "name": "skill_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Skill Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/prerequisites": {
+      "get": {
+        "tags": [
+          "Prerequisites"
+        ],
+        "summary": "List all prerequisite edges",
+        "description": "Retrieve all directed prerequisite edges in the curriculum graph.",
+        "operationId": "list_prerequisites_api_v1_prerequisites_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Skip"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "default": 200,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PrerequisiteResponse"
+                  },
+                  "title": "Response List Prerequisites Api V1 Prerequisites Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Prerequisites"
+        ],
+        "summary": "Add a prerequisite edge",
+        "description": "Add a directed prerequisite edge with automated cycle prevention.\n\nValidates:\n  1. Both skills exist in the database.\n  2. No self-loops (skill_id != requires_skill_id).\n  3. Edge does not already exist.\n  4. Adding this edge will NOT introduce a cycle into the prerequisite graph.",
+        "operationId": "add_prerequisite_api_v1_prerequisites_post",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrerequisiteCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PrerequisiteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Prerequisites"
+        ],
+        "summary": "Delete a prerequisite edge",
+        "description": "Remove a prerequisite edge from the graph.",
+        "operationId": "delete_prerequisite_api_v1_prerequisites_delete",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "skill_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Target skill",
+              "title": "Skill Id"
+            },
+            "description": "Target skill"
+          },
+          {
+            "name": "requires_skill_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Required skill",
+              "title": "Requires Skill Id"
+            },
+            "description": "Required skill"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/prerequisites/skill/{skill_id}": {
+      "get": {
+        "tags": [
+          "Prerequisites"
+        ],
+        "summary": "Get prerequisites for a skill",
+        "description": "Get all skills that must be learned before `skill_id`.",
+        "operationId": "get_prerequisites_for_skill_api_v1_prerequisites_skill__skill_id__get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "skill_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Skill Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PrerequisiteResponse"
+                  },
+                  "title": "Response Get Prerequisites For Skill Api V1 Prerequisites Skill  Skill Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/prerequisites/dependents/{skill_id}": {
+      "get": {
+        "tags": [
+          "Prerequisites"
+        ],
+        "summary": "Get dependents of a skill",
+        "description": "Get all skills that require `skill_id` as a prerequisite.",
+        "operationId": "get_dependents_for_skill_api_v1_prerequisites_dependents__skill_id__get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "skill_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Skill Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PrerequisiteResponse"
+                  },
+                  "title": "Response Get Dependents For Skill Api V1 Prerequisites Dependents  Skill Id  Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/gap-analysis": {
+      "post": {
+        "tags": [
+          "Gap Analysis"
+        ],
+        "summary": "Analyse skill gaps between learner and target career",
+        "description": "Compute which required career skills the learner has not yet confirmed.\n\nThe C# backend sends:\n- The learner's current confirmed skill set (binary: have or don't have).\n- The target career ID.\n- Optional probabilistic mastery values.\n\nReturns a structured, multi-factor gap report ordered by priority.",
+        "operationId": "analyse_gaps_api_v1_gap_analysis_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GapAnalysisRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GapAnalysisResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/v1/learning-path": {
+      "post": {
+        "tags": [
+          "Learning Path"
+        ],
+        "summary": "Generate a personalized, multi-objective learning path for a learner",
+        "description": "Generates an ordered, prerequisite-aware, multi-objective curriculum path.\n\nThe C# backend calls this to get the optimal pedagogical sequence,\nsupporting learner pacing preferences, mastery states, and Pareto alternatives.",
+        "operationId": "generate_path_api_v1_learning_path_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LearningPathRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearningPathResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/v1/mastery/update": {
+      "post": {
+        "tags": [
+          "Mastery",
+          "Mastery"
+        ],
+        "summary": "Record assessment evidence and update BKT mastery",
+        "description": "Record an interaction or assessment score, applying Bayesian Knowledge Tracing.",
+        "operationId": "update_mastery_api_v1_mastery_update_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvidenceUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillMasteryOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/v1/mastery/batch": {
+      "post": {
+        "tags": [
+          "Mastery",
+          "Mastery"
+        ],
+        "summary": "Record batch assessment evidence",
+        "description": "Record multiple observations in sequential order.",
+        "operationId": "batch_update_mastery_api_v1_mastery_batch_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchEvidenceUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SkillMasteryOut"
+                  },
+                  "type": "array",
+                  "title": "Response Batch Update Mastery Api V1 Mastery Batch Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/v1/mastery/{learner_id}": {
+      "get": {
+        "tags": [
+          "Mastery",
+          "Mastery"
+        ],
+        "summary": "Get learner mastery profile",
+        "description": "Retrieve all current probabilistic skill masteries for a learner.",
+        "operationId": "get_learner_mastery_api_v1_mastery__learner_id__get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "learner_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Learner Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearnerMasteryProfileResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/semantic/match": {
+      "post": {
+        "tags": [
+          "Semantic Matching",
+          "Semantic Matching"
+        ],
+        "summary": "Match free text to curriculum skills",
+        "description": "Find the most semantically relevant skills using sub-millisecond cosine vector similarity.",
+        "operationId": "match_skills_semantic_api_v1_semantic_match_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SemanticMatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SemanticMatchResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/graph": {
+      "get": {
+        "tags": [
+          "Visualization"
+        ],
+        "summary": "Interactive DAG Curriculum Graph Visualizer",
+        "description": "Serve the interactive topological curriculum graph visualizer.",
+        "operationId": "view_graph_visualizer_graph_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/docs/swagger": {
+      "get": {
+        "tags": [
+          "Documentation"
+        ],
+        "summary": "Standalone OpenAPI Swagger UI Documentation",
+        "description": "Serve the standalone OpenAPI Swagger UI document.",
+        "operationId": "view_swagger_standalone_docs_swagger_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BatchEvidenceUpdate": {
+        "properties": {
+          "learner_id": {
+            "type": "string",
+            "title": "Learner Id"
+          },
+          "observations": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceUpdate"
+            },
+            "type": "array",
+            "title": "Observations"
+          }
+        },
+        "type": "object",
+        "required": [
+          "learner_id",
+          "observations"
+        ],
+        "title": "BatchEvidenceUpdate"
+      },
+      "CareerCreate": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "Unique stable slug, e.g. 'frontend_developer'"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Display title"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "default": ""
+          },
+          "required_skills": {
+            "items": {
+              "$ref": "#/components/schemas/CareerSkillReqItem"
+            },
+            "type": "array",
+            "title": "Required Skills"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "CareerCreate"
+      },
+      "CareerResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "required_skills": {
+            "items": {
+              "$ref": "#/components/schemas/CareerSkillReqItem"
+            },
+            "type": "array",
+            "title": "Required Skills"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "required_skills"
+        ],
+        "title": "CareerResponse"
+      },
+      "CareerSkillReqItem": {
+        "properties": {
+          "skill_id": {
+            "type": "string",
+            "title": "Skill Id"
+          },
+          "is_mandatory": {
+            "type": "boolean",
+            "title": "Is Mandatory",
+            "default": true
+          },
+          "importance": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Importance",
+            "default": 1
+          }
+        },
+        "type": "object",
+        "required": [
+          "skill_id"
+        ],
+        "title": "CareerSkillReqItem"
+      },
+      "CareerUpdate": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          }
+        },
+        "type": "object",
+        "title": "CareerUpdate"
+      },
+      "ConfirmedSkillInput": {
+        "properties": {
+          "skill_id": {
+            "type": "string",
+            "title": "Skill Id",
+            "description": "ID of a skill the learner has confirmed"
+          }
+        },
+        "type": "object",
+        "required": [
+          "skill_id"
+        ],
+        "title": "ConfirmedSkillInput"
+      },
+      "EvidenceUpdate": {
+        "properties": {
+          "learner_id": {
+            "type": "string",
+            "title": "Learner Id"
+          },
+          "skill_id": {
+            "type": "string",
+            "title": "Skill Id"
+          },
+          "evidence": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              }
+            ],
+            "title": "Evidence",
+            "description": "Boolean pass/fail or continuous score in [0.0, 1.0]"
+          },
+          "evidence_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evidence Id",
+            "description": "Assessment or quiz identifier"
+          },
+          "difficulty": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 5.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Difficulty",
+            "description": "Item difficulty level"
+          },
+          "timestamp": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timestamp",
+            "description": "ISO timestamp of the interaction"
+          }
+        },
+        "type": "object",
+        "required": [
+          "learner_id",
+          "skill_id",
+          "evidence"
+        ],
+        "title": "EvidenceUpdate"
+      },
+      "GapAnalysisRequest": {
+        "properties": {
+          "learner_id": {
+            "type": "string",
+            "title": "Learner Id",
+            "description": "Learner identifier from the C# backend"
+          },
+          "career_id": {
+            "type": "string",
+            "title": "Career Id",
+            "description": "Target career ID"
+          },
+          "confirmed_skills": {
+            "items": {
+              "$ref": "#/components/schemas/ConfirmedSkillInput"
+            },
+            "type": "array",
+            "title": "Confirmed Skills",
+            "description": "Skills the learner has self-confirmed (Yes/No model)"
+          },
+          "mastery_states": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Mastery States",
+            "description": "Optional probabilistic mastery map: skill_id -> mastery in [0, 1]"
+          }
+        },
+        "type": "object",
+        "required": [
+          "learner_id",
+          "career_id"
+        ],
+        "title": "GapAnalysisRequest"
+      },
+      "GapAnalysisResponse": {
+        "properties": {
+          "learner_id": {
+            "type": "string",
+            "title": "Learner Id"
+          },
+          "career_id": {
+            "type": "string",
+            "title": "Career Id"
+          },
+          "career_name": {
+            "type": "string",
+            "title": "Career Name"
+          },
+          "total_required_skills": {
+            "type": "integer",
+            "title": "Total Required Skills"
+          },
+          "skills_confirmed": {
+            "type": "integer",
+            "title": "Skills Confirmed"
+          },
+          "skills_missing": {
+            "type": "integer",
+            "title": "Skills Missing"
+          },
+          "completion_percentage": {
+            "type": "number",
+            "title": "Completion Percentage",
+            "description": "Percentage of required skills already confirmed"
+          },
+          "gaps": {
+            "items": {
+              "$ref": "#/components/schemas/SkillGapItem"
+            },
+            "type": "array",
+            "title": "Gaps"
+          }
+        },
+        "type": "object",
+        "required": [
+          "learner_id",
+          "career_id",
+          "career_name",
+          "total_required_skills",
+          "skills_confirmed",
+          "skills_missing",
+          "completion_percentage",
+          "gaps"
+        ],
+        "title": "GapAnalysisResponse"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "environment": {
+            "type": "string",
+            "title": "Environment"
+          },
+          "llm_enabled": {
+            "type": "boolean",
+            "title": "Llm Enabled"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "version",
+          "environment",
+          "llm_enabled"
+        ],
+        "title": "HealthResponse"
+      },
+      "LearnerMasteryProfileResponse": {
+        "properties": {
+          "learner_id": {
+            "type": "string",
+            "title": "Learner Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "skills": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SkillMasteryOut"
+            },
+            "type": "object",
+            "title": "Skills"
+          }
+        },
+        "type": "object",
+        "required": [
+          "learner_id",
+          "name",
+          "skills"
+        ],
+        "title": "LearnerMasteryProfileResponse"
+      },
+      "LearningPathRequest": {
+        "properties": {
+          "learner_id": {
+            "type": "string",
+            "title": "Learner Id"
+          },
+          "career_id": {
+            "type": "string",
+            "title": "Career Id"
+          },
+          "confirmed_skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Confirmed Skills",
+            "description": "List of skill IDs the learner has confirmed"
+          },
+          "mastery_states": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Mastery States",
+            "description": "Optional probabilistic mastery map: skill_id -> score in [0, 1]"
+          },
+          "pace_preference": {
+            "type": "string",
+            "title": "Pace Preference",
+            "description": "Pacing archetype: balanced | foundational_first | fast_track | domain_focused",
+            "default": "balanced"
+          },
+          "weekly_hours_budget": {
+            "type": "integer",
+            "maximum": 80.0,
+            "minimum": 1.0,
+            "title": "Weekly Hours Budget",
+            "default": 10
+          },
+          "max_total_hours": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Total Hours"
+          },
+          "strategy": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Strategy",
+            "description": "Force a specific sequencing archetype"
+          },
+          "return_alternatives": {
+            "type": "boolean",
+            "title": "Return Alternatives",
+            "description": "Whether to include Pareto alternative pathways",
+            "default": false
+          },
+          "explain": {
+            "type": "boolean",
+            "title": "Explain",
+            "description": "Include natural language curriculum explanation",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "learner_id",
+          "career_id"
+        ],
+        "title": "LearningPathRequest"
+      },
+      "LearningPathResponse": {
+        "properties": {
+          "learner_id": {
+            "type": "string",
+            "title": "Learner Id"
+          },
+          "career_id": {
+            "type": "string",
+            "title": "Career Id"
+          },
+          "career_name": {
+            "type": "string",
+            "title": "Career Name"
+          },
+          "total_skills": {
+            "type": "integer",
+            "title": "Total Skills"
+          },
+          "total_estimated_hours": {
+            "type": "integer",
+            "title": "Total Estimated Hours"
+          },
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/LearningStepOut"
+            },
+            "type": "array",
+            "title": "Steps"
+          },
+          "strategy": {
+            "type": "string",
+            "title": "Strategy",
+            "default": "topological"
+          },
+          "composite_score": {
+            "type": "number",
+            "title": "Composite Score",
+            "default": 0.0
+          },
+          "objective_scores": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Objective Scores"
+          },
+          "pareto_tradeoffs": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Pareto Tradeoffs"
+          },
+          "alternatives": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Alternatives"
+          },
+          "explanation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Explanation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "learner_id",
+          "career_id",
+          "career_name",
+          "total_skills",
+          "total_estimated_hours",
+          "steps"
+        ],
+        "title": "LearningPathResponse"
+      },
+      "LearningStepOut": {
+        "properties": {
+          "order": {
+            "type": "integer",
+            "title": "Order"
+          },
+          "skill_id": {
+            "type": "string",
+            "title": "Skill Id"
+          },
+          "skill_name": {
+            "type": "string",
+            "title": "Skill Name"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "estimated_hours": {
+            "type": "integer",
+            "title": "Estimated Hours"
+          },
+          "rationale": {
+            "type": "string",
+            "title": "Rationale"
+          },
+          "prerequisites_satisfied": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Prerequisites Satisfied"
+          },
+          "reason_codes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Reason Codes"
+          },
+          "unblocks_count": {
+            "type": "integer",
+            "title": "Unblocks Count",
+            "default": 0
+          },
+          "gap_score": {
+            "type": "number",
+            "title": "Gap Score",
+            "default": 0.0
+          },
+          "difficulty_step": {
+            "type": "integer",
+            "title": "Difficulty Step",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "order",
+          "skill_id",
+          "skill_name",
+          "category",
+          "estimated_hours",
+          "rationale",
+          "prerequisites_satisfied"
+        ],
+        "title": "LearningStepOut"
+      },
+      "PrerequisiteCreate": {
+        "properties": {
+          "skill_id": {
+            "type": "string",
+            "title": "Skill Id",
+            "description": "The dependent skill that has the prerequisite"
+          },
+          "requires_skill_id": {
+            "type": "string",
+            "title": "Requires Skill Id",
+            "description": "The prerequisite skill that must be learned first"
+          }
+        },
+        "type": "object",
+        "required": [
+          "skill_id",
+          "requires_skill_id"
+        ],
+        "title": "PrerequisiteCreate"
+      },
+      "PrerequisiteResponse": {
+        "properties": {
+          "skill_id": {
+            "type": "string",
+            "title": "Skill Id"
+          },
+          "requires_skill_id": {
+            "type": "string",
+            "title": "Requires Skill Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "skill_id",
+          "requires_skill_id"
+        ],
+        "title": "PrerequisiteResponse"
+      },
+      "SemanticMatchRequest": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query",
+            "description": "Natural language description of technical skills or experience"
+          },
+          "top_k": {
+            "type": "integer",
+            "maximum": 50.0,
+            "minimum": 1.0,
+            "title": "Top K",
+            "description": "Max skills to return",
+            "default": 5
+          },
+          "min_score": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Min Score",
+            "description": "Minimum cosine similarity threshold",
+            "default": 0.35
+          }
+        },
+        "type": "object",
+        "required": [
+          "query"
+        ],
+        "title": "SemanticMatchRequest"
+      },
+      "SemanticMatchResponse": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "matches": {
+            "items": {
+              "$ref": "#/components/schemas/SkillMatchResult"
+            },
+            "type": "array",
+            "title": "Matches"
+          },
+          "total_matches": {
+            "type": "integer",
+            "title": "Total Matches"
+          }
+        },
+        "type": "object",
+        "required": [
+          "query",
+          "matches",
+          "total_matches"
+        ],
+        "title": "SemanticMatchResponse"
+      },
+      "SkillCreate": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "Unique stable slug, e.g. 'html5'"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Human-readable title"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category",
+            "description": "Domain category slug"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "Summary of the skill",
+            "default": ""
+          },
+          "difficulty": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Difficulty",
+            "description": "Difficulty rating (1-5)",
+            "default": 1
+          },
+          "estimated_hours": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Estimated Hours",
+            "description": "Hours to acquire",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "category"
+        ],
+        "title": "SkillCreate"
+      },
+      "SkillGapItem": {
+        "properties": {
+          "skill_id": {
+            "type": "string",
+            "title": "Skill Id"
+          },
+          "skill_name": {
+            "type": "string",
+            "title": "Skill Name"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "difficulty": {
+            "type": "integer",
+            "title": "Difficulty"
+          },
+          "estimated_hours": {
+            "type": "integer",
+            "title": "Estimated Hours"
+          },
+          "is_mandatory": {
+            "type": "boolean",
+            "title": "Is Mandatory"
+          },
+          "gap_score": {
+            "type": "number",
+            "title": "Gap Score",
+            "description": "Multi-factor priority score",
+            "default": 0.0
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "description": "Categorical readiness and mastery status",
+            "default": "MISSING"
+          },
+          "reason_codes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Reason Codes",
+            "description": "Machine-readable justification codes"
+          },
+          "mastery": {
+            "type": "number",
+            "title": "Mastery",
+            "description": "Current estimated mastery in [0, 1]",
+            "default": 0.0
+          },
+          "prerequisite_impact": {
+            "type": "number",
+            "title": "Prerequisite Impact",
+            "description": "Centrality impact on downstream skills",
+            "default": 1.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "skill_id",
+          "skill_name",
+          "category",
+          "difficulty",
+          "estimated_hours",
+          "is_mandatory"
+        ],
+        "title": "SkillGapItem"
+      },
+      "SkillMasteryOut": {
+        "properties": {
+          "skill_id": {
+            "type": "string",
+            "title": "Skill Id"
+          },
+          "estimated_mastery": {
+            "type": "number",
+            "title": "Estimated Mastery"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence"
+          },
+          "evidence_count": {
+            "type": "integer",
+            "title": "Evidence Count"
+          },
+          "success_count": {
+            "type": "integer",
+            "title": "Success Count",
+            "default": 0
+          },
+          "failure_count": {
+            "type": "integer",
+            "title": "Failure Count",
+            "default": 0
+          },
+          "predicted_performance": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Predicted Performance"
+          },
+          "last_evidence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Evidence"
+          },
+          "difficulty_history": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Difficulty History"
+          }
+        },
+        "type": "object",
+        "required": [
+          "skill_id",
+          "estimated_mastery",
+          "confidence",
+          "evidence_count",
+          "last_evidence",
+          "difficulty_history"
+        ],
+        "title": "SkillMasteryOut"
+      },
+      "SkillMatchResult": {
+        "properties": {
+          "skill_id": {
+            "type": "string",
+            "title": "Skill Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "similarity_score": {
+            "type": "number",
+            "title": "Similarity Score"
+          },
+          "difficulty": {
+            "type": "integer",
+            "title": "Difficulty"
+          },
+          "estimated_hours": {
+            "type": "integer",
+            "title": "Estimated Hours"
+          }
+        },
+        "type": "object",
+        "required": [
+          "skill_id",
+          "name",
+          "category",
+          "similarity_score",
+          "difficulty",
+          "estimated_hours"
+        ],
+        "title": "SkillMatchResult"
+      },
+      "SkillResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "difficulty": {
+            "type": "integer",
+            "title": "Difficulty"
+          },
+          "estimated_hours": {
+            "type": "integer",
+            "title": "Estimated Hours"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "category",
+          "description",
+          "difficulty",
+          "estimated_hours"
+        ],
+        "title": "SkillResponse"
+      },
+      "SkillUpdate": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "category": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Category"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "difficulty": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 5.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Difficulty"
+          },
+          "estimated_hours": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Estimated Hours"
+          }
+        },
+        "type": "object",
+        "title": "SkillUpdate"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "APIKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Service-API-Key"
+      }
+    }
+  }
+}

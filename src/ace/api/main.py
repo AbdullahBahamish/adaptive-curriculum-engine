@@ -76,6 +76,35 @@ def create_app() -> FastAPI:
     app.include_router(mastery.router, prefix=prefix, tags=["Mastery"])
     app.include_router(semantic.router, prefix=prefix, tags=["Semantic Matching"])
 
+    from pathlib import Path
+    from fastapi.responses import HTMLResponse
+
+    @app.get(
+        "/graph",
+        response_class=HTMLResponse,
+        tags=["Visualization"],
+        summary="Interactive DAG Curriculum Graph Visualizer",
+    )
+    def view_graph_visualizer() -> HTMLResponse:
+        """Serve the interactive topological curriculum graph visualizer."""
+        graph_file = Path("docs/graph_visualizer.html")
+        if graph_file.exists():
+            return HTMLResponse(content=graph_file.read_text(encoding="utf-8"))
+        return HTMLResponse("<h3>Graph visualizer not generated yet. Run scripts/generate_graph_visualizer.py</h3>")
+
+    @app.get(
+        "/docs/swagger",
+        response_class=HTMLResponse,
+        tags=["Documentation"],
+        summary="Standalone OpenAPI Swagger UI Documentation",
+    )
+    def view_swagger_standalone() -> HTMLResponse:
+        """Serve the standalone OpenAPI Swagger UI document."""
+        swagger_file = Path("docs/api_docs.html")
+        if swagger_file.exists():
+            return HTMLResponse(content=swagger_file.read_text(encoding="utf-8"))
+        return HTMLResponse("<h3>Standalone docs not generated yet. Run scripts/export_openapi.py</h3>")
+
     return app
 
 
